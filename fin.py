@@ -31,29 +31,29 @@ def get_aspect(x):
 def get_sign(x):
     sign=''
     if x['SunLong'] >= 0 and x['SunLong'] < 30:
-        sign = 'ARI'
+        sign = '01_ARI'
     elif x['SunLong'] >= 30 and x['SunLong'] < 60:
-        sign = 'TAU'
+        sign = '02_TAU'
     elif x['SunLong'] >= 60 and x['SunLong'] < 90:
-        sign = 'GEM'
+        sign = '03_GEM'
     elif x['SunLong'] >= 90 and x['SunLong'] < 120:
-        sign = 'CAN'
+        sign = '04_CAN'
     elif x['SunLong'] >= 120 and x['SunLong'] < 150:
-        sign = 'LEO'
+        sign = '05_LEO'
     elif x['SunLong'] >= 150 and x['SunLong'] < 180:
-        sign = 'VIR'
+        sign = '06_VIR'
     elif x['SunLong'] >= 180 and x['SunLong'] < 210:
-        sign = 'LIB'
+        sign = '07_LIB'
     elif x['SunLong'] >= 210 and x['SunLong'] < 240:
-        sign = 'SCO'
+        sign = '08_SCO'
     elif x['SunLong'] >= 240 and x['SunLong'] < 270:
-        sign = 'SAG'
+        sign = '09_SAG'
     elif x['SunLong'] >= 270 and x['SunLong'] < 300:
-        sign = 'CAP'
+        sign = '10_CAP'
     elif x['SunLong'] >= 300 and x['SunLong'] < 330:
-        sign = 'AQU'
+        sign = '11_AQU'
     elif x['SunLong'] >= 330 and x['SunLong'] < 360:
-        sign = 'PIS'
+        sign = '12_PIS'
     return sign
 
 
@@ -90,6 +90,13 @@ def plot_astro_stock(df):
     plt.show()
 
 
+def clean_ephemris():
+    df = pd.read_csv('Ephemeris2024.csv')
+    df['Date'] = pd.to_datetime(df['Date']).dt.strftime('%Y-%m-%d')
+    print(df.head())
+    df.to_csv('ephemeris_small.csv', index=False)
+
+
 def create_df():
     # ticker = 'NASDAQ_MSFT'
     ticker = 'S&P500'
@@ -97,10 +104,10 @@ def create_df():
     df_ticker['Change_pct_' + ticker] = df_ticker['Close_' + ticker].pct_change()
     df_ticker = df_ticker.set_index('Date')
 
-    df_eph = pd.read_csv('ephemeris_small.csv', usecols=['Date', 'SunLong', 'MoonLong'])
+    df_eph = pd.read_csv('ephemeris_small.csv')
     df_eph = df_eph.set_index('Date')
 
-    df = df_ticker.join(df_eph, how='inner', on='Date')
+    df = df_ticker.join(df_eph[['SunLong', 'MoonLong']], how='inner', on='Date')
     df['Degrees'] = df.apply(get_degrees, axis=1)
     df['Aspect'] = df.apply(get_aspect, axis=1)
     df['Sign'] = df.apply(get_sign, axis=1)
@@ -110,6 +117,7 @@ def create_df():
 
 
 if __name__ == "__main__":
+    clean_ephemris()
     create_df()
     # symbol = '^FTSE'
     # df = create_df(symbol, 60)
