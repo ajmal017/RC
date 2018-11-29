@@ -90,11 +90,13 @@ def plot_astro_stock(df):
     plt.show()
 
 
-def clean_ephemris():
+def add_detail_to_ephemeris():
     df = pd.read_csv('Ephemeris2024.csv')
     df['Date'] = pd.to_datetime(df['Date']).dt.strftime('%Y-%m-%d')
-    print(df.head())
-    df.to_csv('ephemeris_small.csv', index=False)
+    df['Degrees'] = df.apply(get_degrees, axis=1)
+    df['Aspect'] = df.apply(get_aspect, axis=1)
+    df['Sign'] = df.apply(get_sign, axis=1)
+    df.to_csv('ephemeris_detail.csv', index=False)
 
 
 def create_df():
@@ -104,20 +106,17 @@ def create_df():
     df_ticker['Change_pct_' + ticker] = df_ticker['Close_' + ticker].pct_change()
     df_ticker = df_ticker.set_index('Date')
 
-    df_eph = pd.read_csv('ephemeris_small.csv')
+    df_eph = pd.read_csv('ephemeris_detail.csv')
     df_eph = df_eph.set_index('Date')
 
-    df = df_ticker.join(df_eph[['SunLong', 'MoonLong']], how='inner', on='Date')
-    df['Degrees'] = df.apply(get_degrees, axis=1)
-    df['Aspect'] = df.apply(get_aspect, axis=1)
-    df['Sign'] = df.apply(get_sign, axis=1)
-    df.to_csv('fin.csv')
+    df = df_ticker.join(df_eph, how='inner', on='Date')
+    df.to_csv('finastro.csv')
 
     print(df.head)
 
 
 if __name__ == "__main__":
-    clean_ephemris()
+    #add_detail_to_ephemeris()
     create_df()
     # symbol = '^FTSE'
     # df = create_df(symbol, 60)
