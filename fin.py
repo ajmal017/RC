@@ -75,18 +75,21 @@ def create_df_old(ticker, weeks_of_history):
 def label_point(x, y, val, ax):
     a = pd.concat({'x': x, 'y': y, 'val': val}, axis=1)
     for i, point in a.iterrows():
-        ax.text(point['x'], point['y'], str(point['val']), fontsize=6)
+        aspect = str(point['val'])
+        if aspect == 'nan':
+            aspect = ''
+        ax.text(point['x'], point['y'], aspect, fontsize=6)
 
 
 def plot_astro_stock(df):
-    fig = plt.figure()
-    #ax1 = fig.add_subplot(2, 1, 1)
-    #ax1.plot(df.index, df['Close'], '-', color='b')
-    ax1 = fig.add_subplot(211,  ylabel='Value', axisbg='0.9')    
-    df['Close'].plot(ax=ax1, color='y', lw=0.5)
-    label_point(df['cob'], df['Close'], df['Aspect'], ax1)
-    ax2 = fig.add_subplot(212,  ylabel='Degrees', axisbg='0.9')
-    df['Degrees'].plot(ax=ax2, color='b', lw=0.5)            
+
+    # fig = plt.figure()
+    f, (ax1) = plt.subplots(1, sharex=False, sharey=False)
+    x_t = pd.to_datetime(df.index.values)
+
+    ax1.plot(x_t, df['Close'], label='', color='black')
+    # ax2.plot(x_t, df['Degrees'], label='', color='blue')
+    label_point(df['cob'].astype(str), df['Close'].astype(float), df['Aspect'], ax1)
     plt.show()
 
 
@@ -96,6 +99,7 @@ def add_detail_to_ephemeris():
     df['Degrees'] = df.apply(get_degrees, axis=1)
     df['Aspect'] = df.apply(get_aspect, axis=1)
     df['Sign'] = df.apply(get_sign, axis=1)
+    df['cob'] = df['Date']
     df.to_csv('ephemeris_detail.csv', index=False)
 
 
@@ -111,8 +115,10 @@ def create_df():
 
     df = df_ticker.join(df_eph, how='inner', on='Date')
     df.to_csv('finastro.csv')
+    df['Close'] = df['Close_' + ticker]
+    plot_astro_stock(df)
 
-    print(df.head)
+    #print(df.head)
 
 
 if __name__ == "__main__":
