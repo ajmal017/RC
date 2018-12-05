@@ -15,21 +15,21 @@ def get_degrees(x):
 def get_aspect(x):
     aspect = ''
     orb = 5
-    if (120 + orb >= x['Degrees']) and (120 - orb <= x['Degrees']):
+    if (120 + orb >= x['SunMoonDegrees']) and (120 - orb <= x['SunMoonDegrees']):
         aspect = 'TR'
-    elif (60 + orb >= x['Degrees']) and (60 - orb <= x['Degrees']):
+    elif (60 + orb >= x['SunMoonDegrees']) and (60 - orb <= x['SunMoonDegrees']):
         aspect = 'SX'
-    elif (90 + orb >= x['Degrees']) and (90 - orb <= x['Degrees']):
+    elif (90 + orb >= x['SunMoonDegrees']) and (90 - orb <= x['SunMoonDegrees']):
         aspect = 'SQ'
-    elif (180 + orb >= x['Degrees']) and (180 - orb <= x['Degrees']):
+    elif (180 + orb >= x['SunMoonDegrees']) and (180 - orb <= x['SunMoonDegrees']):
         aspect = 'OP'
-    if (0 + orb >= x['Degrees']) and (0 - orb <= x['Degrees']):
+    if (0 + orb >= x['SunMoonDegrees']) and (0 - orb <= x['SunMoonDegrees']):
         aspect = 'CJ'
     return aspect
 
 
 def get_sign(x):
-    sign=''
+    sign = ''
     if x['SunLong'] >= 0 and x['SunLong'] < 30:
         sign = '01_ARI'
     elif x['SunLong'] >= 30 and x['SunLong'] < 60:
@@ -57,21 +57,6 @@ def get_sign(x):
     return sign
 
 
-def create_df_old(ticker, weeks_of_history):
-    # df = web.DataReader(ticker, 'yahoo', datetime.today() - timedelta(weeks=weeks_of_history), datetime.today())
-    # df = pdr.data.get_data_yahoo(ticker)
-    # df_ticker['Date'] = pd.to_datetime(df_ticker['Date']).dt.strftime('%Y-%m-%d')
-    df = da.create_df_from_tickers(['S&P500'])
-    df_eph = pd.DataFrame.from_csv('Ephemeris2024.csv')
-    df['MoonLong'] = df_eph['MoonLong']
-    df['SunLong'] = df_eph['SunLong']
-    df['Degrees'] = df.apply(get_degrees, axis=1)
-    df['Aspect'] = df.apply(get_aspect, axis=1)
-    df['Sign'] = df.apply(get_sign, axis=1)
-    df['cob'] = df.index
-    return df
-   
-
 def label_point(x, y, val, ax):
     a = pd.concat({'x': x, 'y': y, 'val': val}, axis=1)
     for i, point in a.iterrows():
@@ -82,7 +67,6 @@ def label_point(x, y, val, ax):
 
 
 def plot_astro_stock(df):
-
     # fig = plt.figure()
     f, (ax1) = plt.subplots(1, sharex=False, sharey=False)
     x_t = pd.to_datetime(df.index.values)
@@ -93,7 +77,7 @@ def plot_astro_stock(df):
     plt.show()
 
 
-def create_df(ticker = 'S&P500'):
+def create_df(ticker='S&P500'):
     # ticker = 'NASDAQ_MSFT'
 
     df_ticker = pd.read_csv('{}{}.csv'.format(cp.dirs['PriceHistories'], ticker, index_col=True))
@@ -102,12 +86,17 @@ def create_df(ticker = 'S&P500'):
 
     df_eph = pd.read_csv('Ephemeris2024.csv')
     df_eph['Date'] = pd.to_datetime(df_eph['Date']).dt.strftime('%Y-%m-%d')
-    df_eph['Degrees'] = df_eph.apply(get_degrees, axis=1)
-    df_eph['Aspect'] = df_eph.apply(get_aspect, axis=1)
-    df_eph['Sign'] = df_eph.apply(get_sign, axis=1)
+    df_eph['SunMoonDegrees'] = df_eph.apply(get_degrees, axis=1)
+    df_eph['SunMoonAspect'] = df_eph.apply(get_aspect, axis=1)
+    df_eph['SunSign'] = df_eph.apply(get_sign, axis=1)
     df_eph['cob'] = df_eph['Date']
     df_eph = df_eph.set_index('Date')
-    df_eph = df_eph[df_eph.index < '2018-13-31']
+    # Date,MoonLong,MoonLat,SunLong,SunLat,MercuryLong,MercuryLat,VenusLong,VenusLat,MarsLong,MarsLat,JupiterLong,JupiterLat,SaturnLong,SaturnLat,UranusLong,UranusLat,NeptuneLong,NeptuneLat,PlutoLong,PlutoLat,TrueNodeLong,TrueNodeLat,SouthNodeLong,SouthNodeLat,CupidoLong,CupidoLat,HadesLong,HadesLat,ZeusLong,ZeusLat,KronosLong,KronosLat,ApollonLong,ApollonLat,AdmetosLong,AdmetosLat,VulcanusLong,VulcanusLat,PoseidonLong,PoseidonLat,TransplutoLong,TransplutoLat,BlackMoonLong,BlackMoonLat,CoAscLong,CoAscLat,PolarAscLong,PolarAscLat,DescendantLong,DescendantLat,ImumCoeliLong,ImumCoeliLat,AntiVertexLong,AntiVertexLat,Eq.Dsc.Long,Eq.Dsc.Lat,CoDscLong,CoDscLat,PolarDscLong,PolarDscLat,AriesPntLong,AriesPntLat,LibraPntLong,LibraPntLat,VernalPntLong,VernalPntLat,SelenaLong,SelenaLat,SednaLong,SednaLat,ErisLong,ErisLat
+    df_eph = df_eph[['MoonLong', 'SunLong', 'MercuryLong', 'VenusLong', 'MarsLong', 'JupiterLong', 'SaturnLong',
+                     'UranusLong', 'NeptuneLong', 'PlutoLong', 'SouthNodeLong', 'SunMoonDegrees', 'SunMoonAspect',
+                     'SunSign', 'cob']]
+
+    df_eph = df_eph[(df_eph.index > '2010-01-01') & (df_eph.index < '2018-13-31')]
 
     # df = df_ticker.join(df_eph, how='inner')
     df = df_eph.join(df_ticker, how='outer')
@@ -120,7 +109,7 @@ def create_df(ticker = 'S&P500'):
 
 
 if __name__ == "__main__":
-    #add_detail_to_ephemeris()
+    # add_detail_to_ephemeris()
     create_df()
     # symbol = '^FTSE'
     # df = create_df(symbol, 60)
