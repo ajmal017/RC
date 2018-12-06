@@ -3,6 +3,7 @@ import ConfigParameters as cp
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 import seaborn as sn
+import Data as da
 
 
 def get_degrees(x):
@@ -77,13 +78,7 @@ def plot_astro_stock(df):
     plt.show()
 
 
-def create_df(ticker='S&P500'):
-    # ticker = 'NASDAQ_MSFT'
-
-    df_ticker = pd.read_csv('{}{}.csv'.format(cp.dirs['PriceHistories'], ticker, index_col=True))
-    df_ticker['Change_pct_' + ticker] = df_ticker['Close_' + ticker].pct_change()
-    df_ticker = df_ticker.set_index('Date')
-
+def create_ephemeris_df():
     df_eph = pd.read_csv('Ephemeris2024.csv')
     df_eph['Date'] = pd.to_datetime(df_eph['Date']).dt.strftime('%Y-%m-%d')
     df_eph['SunMoonDegrees'] = df_eph.apply(get_degrees, axis=1)
@@ -96,21 +91,46 @@ def create_df(ticker='S&P500'):
                      'UranusLong', 'NeptuneLong', 'PlutoLong', 'SouthNodeLong', 'SunMoonDegrees', 'SunMoonAspect',
                      'SunSign', 'cob']]
 
-    df_eph = df_eph[(df_eph.index > '2010-01-01') & (df_eph.index < '2018-13-31')]
+    return df_eph
 
-    # df = df_ticker.join(df_eph, how='inner')
+
+def create_df_old(ticker='S&P500'):
+    # ticker = 'NASDAQ_MSFT'
+
+    df_ticker = pd.read_csv('{}{}.csv'.format(cp.dirs['PriceHistories'], ticker, index_col=True))
+    df_ticker['Change_pct_' + ticker] = df_ticker['Close_' + ticker].pct_change()
+    df_ticker = df_ticker.set_index('Date')
+
+    df_eph = create_ephemeris_df()
+    df_eph = df_eph[(df_eph.index > '2010-01-01') & (df_eph.index < '2018-13-31')]
     df = df_eph.join(df_ticker, how='outer')
     df.to_csv('finastro.csv')
     df['Close'] = df['Close_' + ticker]
     # plot_astro_stock(df)
-    print(type(df.index))
     df = df[df.index > '2018-11-01']
     print(df.tail)
 
 
+def collect_and_prepare_data():
+    # Add stock data
+    tickers = ['NASDAQ:MSFT', 'NASDAQ:AAPL']
+    df_tickers = da.create_df_from_tickers(tickers)
+
+    # Add Ephemeris data
+    df_eph = create_ephemeris_df()
+    df_eph = df_eph[(df_eph.index > '2010-01-01') & (df_eph.index < '2018-13-31')]
+    df = df_eph.join(df_tickers, how='outer')
+    df.to_csv('finastro.csv')
+    print(df.tail())
+
+
+def machine_learning_process():
+    collect_and_prepare_data()
+
+
 if __name__ == "__main__":
     # add_detail_to_ephemeris()
-    create_df()
+    machine_learning_process()
     # symbol = '^FTSE'
     # df = create_df(symbol, 60)
     # print(df)
