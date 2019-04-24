@@ -45,10 +45,10 @@ def run(df, portfolio):
             portfolio.net_exposure += position_value
             portfolio.gross_exposure += abs(position_value)
 
-        df.set_value(i, 'Cash', portfolio.cash)
-        df.set_value(i, 'NetExposure', portfolio.net_exposure)
-        df.set_value(i, 'GrossExposure', portfolio.gross_exposure)
-        df.set_value(i, 'Equity', portfolio.cash + portfolio.net_exposure)
+        df.at[i, 'Cash'] = portfolio.cash
+        df.at[i, 'NetExposure'] = portfolio.net_exposure
+        df.at[i, 'GrossExposure'] = portfolio.gross_exposure
+        df.at[i, 'Equity'] = portfolio.cash + portfolio.net_exposure
 
     df['equity_daily_returns'] = df['Equity'].pct_change()
     df['equity_cumulative_returns'] = (df['Equity'] / df['Equity'][0]) - 1.0
