@@ -14,21 +14,20 @@ def create_df_from_tickers(tickers, start_date=None, end_date=None):
     pct columns will be expressed as decimals e.g. 0.23 is 23%
     """
     # Instantiate the dataframe with a benchmark whose index can be used to outer-join to
-    df = pd.DataFrame.from_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], Cp.ticker_benchmark.replace(':', '_')))
+    df = pd.read_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], Cp.ticker_benchmark.replace(':', '_')), index_col=0)
     df['Close_' + Cp.ticker_benchmark].replace(to_replace=0, method='ffill', inplace=True)
     df['Change_pct_' + Cp.ticker_benchmark] = df['Close_' + Cp.ticker_benchmark].pct_change()
 
     # add FX
     df['Close_GBX-GBP'] = 0.01
-    dfa = pd.DataFrame.from_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], 'USD-GBP'))
+    dfa = pd.read_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], 'USD-GBP'), index_col=0)
     df = df.join(dfa, how='inner')
     df['Change_pct_USD_GBP'] = df['Close_USD-GBP'].pct_change()
 
     # Create the multi_stock dataframe
-    for ticker in tickers + ['CBOE:VIX']:
-        dfa = pd.DataFrame.from_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], ticker.replace(':', '_')))
+    for ticker in tickers:   # + ['CBOE:VIX']:
+        dfa = pd.read_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], ticker.replace(':', '_')), index_col=0)
         df = df.join(dfa, how='inner', rsuffix=ticker)
-        print(ticker, df.index[-1])
 
     for ticker in tickers:
         df['Change_pct_' + ticker] = df['Close_' + ticker].pct_change()
@@ -41,6 +40,7 @@ def create_df_from_tickers(tickers, start_date=None, end_date=None):
 
     # Yahoo data has historical prices until today - 1 business day. This section adds a row to DF for
     # today (cob) so that we can get orders for today
+    df.index = pd.to_datetime(df.index)
     last_cob_row = {df.index[-1] + BDay(1): df.iloc[-1]}
     df_last_cob_row = pd.DataFrame.from_dict(last_cob_row, orient='index')
     df = pd.concat([df, df_last_cob_row])
@@ -78,12 +78,12 @@ def get_tickers_with_good_data(tickers):
     :return:
     """
     # Determine most recent date in time series from benchmark
-    dfb = pd.DataFrame.from_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], Cp.ticker_benchmark.replace(':', '_')))
+    dfb = pd.read_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], Cp.ticker_benchmark.replace(':', '_')))
 
     good_tickers = []
     for ticker in tickers:
         try:
-            df = pd.DataFrame.from_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], ticker.replace(':', '_')))
+            df = pd.read_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], ticker.replace(':', '_')))
             df = df.sort_index()
             if len(df.index) < 300:
                 if Cp.logging:
@@ -113,7 +113,7 @@ def do_dataframes_have_same_last_n_days_of_histories(df1, df2, number_of_days=1)
 
 # Returns a DF of MetaData for a set of assets based on criteria
 def get_ticker_metadata(ticker=None, exchange_sectors=None, exchanges=None, sectors=None, industry_groups=None):
-    df = pd.read_csv(Cp.files['TickerMaster'], index_col='Ticker', encoding = "ISO-8859-1")
+    df = pd.read_csv(Cp.files['TickerMaster'], index_col='Ticker', encoding="ISO-8859-1")
     df['Exchange_Sector'] = df['Exchange'] + '_' + df['Sector']
 
     if ticker is not None:
@@ -131,7 +131,6 @@ def get_ticker_metadata(ticker=None, exchange_sectors=None, exchanges=None, sect
 
 
 def download_yahoo_eod_data():
-
     # Obtain a map of stockopedia tickers to Yahoo and IB tickers as they are not the same
     df_tickers = pd.read_csv(Cp.files['TickerMaster'], index_col='Ticker')
 
@@ -156,7 +155,6 @@ def download_yahoo_eod_data():
 
 
 def download_yahoo_eod_data_for_single_ticker(yahoo_ticker, filename, close_column_name=''):
-
     try:
         df = pdr.data.get_data_yahoo(yahoo_ticker)
         df = df.drop(['Open', 'High', 'Low', 'Close', 'Volume'], axis=1)
@@ -214,8 +212,8 @@ def production():
 def static_data():
     # UK Equities
     lse = r'instruments-defined-by-mifir-identifiers-list-on-lse.xlsx'
-    df_shares = pd.read_excel(lse,sheetname='1.1 Shares', header=7)
-    df_etfs = pd.read_excel(lse,sheetname='1.3 ETFs', header=7)
+    df_shares = pd.read_excel(lse, sheetname='1.1 Shares', header=7)
+    df_etfs = pd.read_excel(lse, sheetname='1.3 ETFs', header=7)
     df_uk = pd.concat([df_shares, df_etfs])
 
     df_uk.rename(columns={'TIDM': 'Symbol',
@@ -275,9 +273,9 @@ def static_data():
     df = df[(df['Sector'] != 'n/a') & (df['Industry Grp'] != 'n/a')]
 
     df.to_csv('TickerMaster.csv')
-    
 
-def temp_test():
+
+def temp_1():
     tickers = ['NYSE:SPY', 'LON:ISF', 'LON:RDSB', 'NASDAQ:MSFT', 'NASDAQ:AAPL', 'NASDAQ:FB', 'NYSE:XOM', 'NYSE:GS',
                'NYSE:JPM', 'NYSE:BA']
     df = create_df_from_tickers(tickers)
@@ -287,17 +285,25 @@ def temp_test():
 
     print(df.tail())
 
-    
+
+def temp_2():
+    df = pd.read_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], Cp.ticker_benchmark.replace(':', '_')), index_col=0)
+    print(df.tail(3))
+    df = df.append(pd.DataFrame(df[-1:].values, index=['2019-04-24'], columns=df.columns))
+    print(df.tail(3))
+
+
 
 if __name__ == "__main__":
     print('Start: ', datetime.today())
     # production()
-    #temp_test()
+    # temp_test()
     # static_data()
     # download_yahoo_eod_data()
     # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='^GSPC', filename=Cp.ticker_benchmark, close_column_name=Cp.ticker_benchmark)
-    download_yahoo_eod_data_for_single_ticker(yahoo_ticker='VUKE.L', filename='LON_VUKE', close_column_name='LON:VUKE')
-    #download_yahoo_eod_data_for_single_ticker(yahoo_ticker='SPY', filename='NYSE_SPY', close_column_name='NYSE:SPY')
-    #download_yahoo_eod_data_for_single_ticker(yahoo_ticker='XLF', filename='NYSE_XLF', close_column_name='NYSE:XLF')
+    # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='VUKE.L', filename='LON_VUKE', close_column_name='LON:VUKE')
+    # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='SPY', filename='NYSE_SPY', close_column_name='NYSE:SPY')
+    # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='XLF', filename='NYSE_XLF', close_column_name='NYSE:XLF')
+    temp_2()
 
     print('Finished: ', datetime.today())
