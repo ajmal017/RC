@@ -90,8 +90,8 @@ def rolling_stats(df, y_column, x_column, window=20):
 
 if __name__ == "__main__":
     # ticker_pair = 'NASDAQ:FB_NASDAQ:MCHP'
-#     ticker_pair = 'NYSE:TD_NYSE:BLK'
-    ticker_pair = 'NYSE:ABBV_NYSE:CNC'
+    # ticker_pair = 'NYSE:TD_NYSE:BLK'
+    ticker_pair = 'LON:IGUS_LON:VUSA'
     # ticker_pair = 'NASDAQ:AABA_NYSE:VMW'
     # ticker_pair = 'LON:ISF_LON:MIDD'
     tickers = ticker_pair.split('_')

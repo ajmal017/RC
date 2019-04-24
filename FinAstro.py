@@ -100,7 +100,7 @@ def create_ephemeris_df():
 def collect_and_prepare_data():
     # Add stock data
     # tickers = ['NASDAQ:MSFT', 'NASDAQ:AAPL']
-    tickers = ['LON:IGUS', 'LON:ISF']
+    tickers = ['LON:IGUS', 'LON:VUKE']
     df_tickers = da.create_df_from_tickers(tickers)
     print(df_tickers.tail(3))
     # Add Ephemeris data
