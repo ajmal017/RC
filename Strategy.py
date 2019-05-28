@@ -11,7 +11,7 @@ def create_long_short_tickers(tickers, df, ticker_group, signal_lag):
 
 
 def rsi(tickers, df, ticker_group, signal_lag):
-
+    print('1')
     # Add Relative strength values
     for ticker in [Cp.ticker_benchmark] + tickers:
         df['score_' + ticker] = 0.0
@@ -45,7 +45,8 @@ def rsi(tickers, df, ticker_group, signal_lag):
         df[ticker_group + '_long_ticker'] = df[ticker_group + '_long_ticker'].replace(np.nan, '', regex=True)
         df[ticker_group + '_short_ticker'] = df[ticker_group + '_short_ticker'].replace(np.nan, '', regex=True)
         df['score_' + ticker] = df['score_' + ticker].replace(np.nan, 0.0, regex=True)
-
+        print(df.tail)
+        df.to_csv('z.csv')
         return df
 
 

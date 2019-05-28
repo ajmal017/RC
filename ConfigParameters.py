@@ -85,15 +85,15 @@ macro = [
          'Sector': 'Macro', 'Industry Grp': 'Index', 'CCY': 'USD', 'MarketCapBillions': 0.0,
          'YahooTicker': '^GSPC', 'GoogleTicker': 'INDEXCBOE: .INX'},
 
-    {'Exchange': 'CBOE', 'Market': 'Main', 'Ticker': 'VIX', 'Symbol': 'VIX', 'Name': 'VIX',
+    {'Exchange': 'CBOE', 'Market': 'Main', 'Ticker': 'CBOE:VIX', 'Symbol': 'VIX', 'Name': 'VIX',
      'Sector': 'Macro', 'Industry Grp': 'Index', 'CCY': 'USD', 'MarketCapBillions': 0.0,
      'YahooTicker': '^VIX', 'GoogleTicker': 'INDEXCBOE: VIX'},
 
-    {'Exchange': 'LON', 'Market': 'MAIN', 'Ticker': 'ISF', 'Symbol': 'ISF', 'Name': 'iShares FTSE100',
+    {'Exchange': 'LON', 'Market': 'MAIN', 'Ticker': 'LON:ISF', 'Symbol': 'ISF', 'Name': 'iShares FTSE100',
          'Sector': 'Macro', 'Industry Grp': 'Index', 'CCY': 'GBP', 'MarketCapBillions': 0.0,
          'YahooTicker': 'ISF.L', 'GoogleTicker': 'LON:ISF'},
 
-    {'Exchange': 'LON', 'Market': 'MAIN', 'Ticker': 'IGUS', 'Symbol': 'IGUS', 'Name': 'iShares S&P500 GBP Hedged',
+    {'Exchange': 'LON', 'Market': 'MAIN', 'Ticker': 'LON:IGUS', 'Symbol': 'IGUS', 'Name': 'iShares S&P500 GBP Hedged',
      'Sector': 'Macro', 'Industry Grp': 'Index', 'CCY': 'GBP', 'MarketCapBillions': 0.0,
      'YahooTicker': 'IGUS.L', 'GoogleTicker': 'LON:IGUS'}
 

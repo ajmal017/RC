@@ -327,7 +327,7 @@ LON:WWH,LON,MAIN MARKET,WWH,WORLDWIDE HEALTHCARE TRUST PLC,Financials,Financial 
 LON:WPP,LON,MAIN MARKET,WPP,WPP PLC,Consumer Services,Media,GBX,17.029796394,WPP.L,LON:WPP
 LON:ZHEH,LON,MAIN MARKET,ZHEH,ZHEJIANG EXPRESSWAY CO,Industrials,Industrial Goods & Services,GBX,1.129039969,ZHEH.L,LON:ZHEH
 LON:ZPG,LON,MAIN MARKET,ZPG,ZPG PLC,Consumer Services,Media,GBX,1.450933442,ZPG.L,LON:ZPG
-NASDAQ:ABMD,NASDAQ,MAIN,ABMD,"ABIOMED, Inc.",Health Care,Medical/Dental Instruments,USD,12.200803914149999,ABMD,NASDAQ:ABMD
+NASDAQ:ABMD,NASDAQ,MAIN,ABMD,"ABIOMED, Inc.",Health Care,Medical/Dental Instruments,USD,12.20127547431,ABMD,NASDAQ:ABMD
 NASDAQ:ATVI,NASDAQ,MAIN,ATVI,"Activision Blizzard, Inc",Technology,Computer Software: Prepackaged Software,USD,32.39442414651,ATVI,NASDAQ:ATVI
 NASDAQ:ADBE,NASDAQ,MAIN,ADBE,Adobe Inc.,Technology,Computer Software: Prepackaged Software,USD,134.07428060811,ADBE,NASDAQ:ADBE
 NASDAQ:AMD,NASDAQ,MAIN,AMD,"Advanced Micro Devices, Inc.",Technology,Semiconductors,USD,28.59654483612,AMD,NASDAQ:AMD
@@ -352,7 +352,7 @@ NASDAQ:ADI,NASDAQ,MAIN,ADI,"Analog Devices, Inc.",Technology,Semiconductors,USD,
 NASDAQ:ANGI,NASDAQ,MAIN,ANGI,ANGI Homeservices Inc.,Consumer Services,Advertising,USD,7.3091332824899995,ANGI,NASDAQ:ANGI
 NASDAQ:ANSS,NASDAQ,MAIN,ANSS,"ANSYS, Inc.",Technology,Computer Software: Prepackaged Software,USD,15.287564070950001,ANSS,NASDAQ:ANSS
 NASDAQ:AAPL,NASDAQ,MAIN,AAPL,Apple Inc.,Technology,Computer Manufacturing,USD,823.45439275,AAPL,NASDAQ:AAPL
-NASDAQ:AMAT,NASDAQ,MAIN,AMAT,"Applied Materials, Inc.",Technology,Semiconductors,USD,37.5010080555,AMAT,NASDAQ:AMAT
+NASDAQ:AMAT,NASDAQ,MAIN,AMAT,"Applied Materials, Inc.",Technology,Semiconductors,USD,36.9761446955,AMAT,NASDAQ:AMAT
 NASDAQ:ACGL,NASDAQ,MAIN,ACGL,Arch Capital Group Ltd.,Finance,Property-Casualty Insurers,USD,13.8908373728,ACGL,NASDAQ:ACGL
 NASDAQ:ARCC,NASDAQ,MAIN,ARCC,Ares Capital Corporation,,,USD,7.622211816,ARCC,NASDAQ:ARCC
 NASDAQ:ARRY,NASDAQ,MAIN,ARRY,Array BioPharma Inc.,Health Care,Major Pharmaceuticals,USD,6.00722816967,ARRY,NASDAQ:ARRY
@@ -421,7 +421,7 @@ NASDAQ:ETFC,NASDAQ,MAIN,ETFC,E*TRADE Financial Corporation,Finance,Savings Insti
 NASDAQ:EWBC,NASDAQ,MAIN,EWBC,"East West Bancorp, Inc.",Finance,Major Banks,USD,6.6543407172,EWBC,NASDAQ:EWBC
 NASDAQ:EBAY,NASDAQ,MAIN,EBAY,eBay Inc.,Miscellaneous,Business Services,USD,31.488284998130002,EBAY,NASDAQ:EBAY
 NASDAQ:ESLT,NASDAQ,MAIN,ESLT,Elbit Systems Ltd.,Capital Goods,Military/Government/Technical,USD,6.04401733934,ESLT,NASDAQ:ESLT
-NASDAQ:EA,NASDAQ,MAIN,EA,Electronic Arts Inc.,Technology,Computer Software: Prepackaged Software,USD,27.6556670667,EA,NASDAQ:EA
+NASDAQ:EA,NASDAQ,MAIN,EA,Electronic Arts Inc.,Technology,Computer Software: Prepackaged Software,USD,27.440183125889998,EA,NASDAQ:EA
 NASDAQ:EQIX,NASDAQ,MAIN,EQIX,"Equinix, Inc.",Consumer Services,Real Estate Investment Trusts,USD,41.74245477124,EQIX,NASDAQ:EQIX
 NASDAQ:ERIE,NASDAQ,MAIN,ERIE,Erie Indemnity Company,Finance,Specialty Insurers,USD,10.511309265360001,ERIE,NASDAQ:ERIE
 NASDAQ:ETSY,NASDAQ,MAIN,ETSY,"Etsy, Inc.",Miscellaneous,Business Services,USD,7.77713161806,ETSY,NASDAQ:ETSY
@@ -433,7 +433,7 @@ NASDAQ:EXPD,NASDAQ,MAIN,EXPD,"Expeditors International of Washington, Inc.",Tran
 NASDAQ:FFIV,NASDAQ,MAIN,FFIV,"F5 Networks, Inc.",Technology,Computer Communications Equipment,USD,8.17466561784,FFIV,NASDAQ:FFIV
 NASDAQ:FB,NASDAQ,MAIN,FB,"Facebook, Inc.",Technology,"Computer Software: Programming, Data Processing",USD,516.83373054016,FB,NASDAQ:FB
 NASDAQ:FAST,NASDAQ,MAIN,FAST,Fastenal Company,Consumer Services,RETAIL: Building Materials,USD,17.67135087556,FAST,NASDAQ:FAST
-NASDAQ:FITB,NASDAQ,MAIN,FITB,Fifth Third Bancorp,Finance,Major Banks,USD,19.99733478281,FITB,NASDAQ:FITB
+NASDAQ:FITB,NASDAQ,MAIN,FITB,Fifth Third Bancorp,Finance,Major Banks,USD,19.937062974990003,FITB,NASDAQ:FITB
 NASDAQ:FSLR,NASDAQ,MAIN,FSLR,"First Solar, Inc.",Technology,Semiconductors,USD,6.03779103235,FSLR,NASDAQ:FSLR
 NASDAQ:FISV,NASDAQ,MAIN,FISV,"Fiserv, Inc.",Technology,EDP Services,USD,34.1030219222,FISV,NASDAQ:FISV
 NASDAQ:FIVE,NASDAQ,MAIN,FIVE,"Five Below, Inc.",Consumer Services,Department/Specialty Retail Stores,USD,7.3894136309,FIVE,NASDAQ:FIVE
@@ -464,30 +464,30 @@ NASDAQ:ILMN,NASDAQ,MAIN,ILMN,"Illumina, Inc.",Capital Goods,Biotechnology: Labor
 NASDAQ:INCY,NASDAQ,MAIN,INCY,Incyte Corporation,Health Care,Biotechnology: Commercial Physical & Biological Resarch,USD,17.53035138075,INCY,NASDAQ:INCY
 NASDAQ:PODD,NASDAQ,MAIN,PODD,Insulet Corporation,Health Care,Medical/Dental Instruments,USD,6.478941023939999,PODD,NASDAQ:PODD
 NASDAQ:INTC,NASDAQ,MAIN,INTC,Intel Corporation,Technology,Semiconductors,USD,199.53989,INTC,NASDAQ:INTC
-NASDAQ:INTU,NASDAQ,MAIN,INTU,Intuit Inc.,Technology,Computer Software: Prepackaged Software,USD,66.70611449512,INTU,NASDAQ:INTU
+NASDAQ:INTU,NASDAQ,MAIN,INTU,Intuit Inc.,Technology,Computer Software: Prepackaged Software,USD,66.7499867698,INTU,NASDAQ:INTU
 NASDAQ:ISRG,NASDAQ,MAIN,ISRG,"Intuitive Surgical, Inc.",Health Care,Industrial Specialties,USD,55.014748996739996,ISRG,NASDAQ:ISRG
-NASDAQ:QQQ,NASDAQ,MAIN,QQQ,"Invesco QQQ Trust, Series 1",,,USD,69.9278,QQQ,NASDAQ:QQQ
+NASDAQ:QQQ,NASDAQ,MAIN,QQQ,"Invesco QQQ Trust, Series 1",,,USD,69.134988,QQQ,NASDAQ:QQQ
 NASDAQ:IONS,NASDAQ,MAIN,IONS,"Ionis Pharmaceuticals, Inc.",Health Care,Major Pharmaceuticals,USD,9.08170417168,IONS,NASDAQ:IONS
 NASDAQ:IPGP,NASDAQ,MAIN,IPGP,IPG Photonics Corporation,Technology,Semiconductors,USD,6.96237356133,IPGP,NASDAQ:IPGP
 NASDAQ:IQ,NASDAQ,MAIN,IQ,"iQIYI, Inc.",Consumer Services,Consumer Electronics/Video Chains,USD,5.4582020207,IQ,NASDAQ:IQ
-NASDAQ:SHY,NASDAQ,MAIN,SHY,iShares 1-3 Year Treasury Bond ETF,,,USD,19.751935,SHY,NASDAQ:SHY
-NASDAQ:TLT,NASDAQ,MAIN,TLT,iShares 20+ Year Treasury Bond ETF,,,USD,13.046338,TLT,NASDAQ:TLT
+NASDAQ:SHY,NASDAQ,MAIN,SHY,iShares 1-3 Year Treasury Bond ETF,,,USD,19.911972,SHY,NASDAQ:SHY
+NASDAQ:TLT,NASDAQ,MAIN,TLT,iShares 20+ Year Treasury Bond ETF,,,USD,13.174118,TLT,NASDAQ:TLT
 NASDAQ:IEI,NASDAQ,MAIN,IEI,iShares 3-7 Year Treasury Bond ETF,,,USD,6.96994,IEI,NASDAQ:IEI
-NASDAQ:IEF,NASDAQ,MAIN,IEF,iShares 7-10 Year Treasury Bond ETF,,,USD,13.550094,IEF,NASDAQ:IEF
+NASDAQ:IEF,NASDAQ,MAIN,IEF,iShares 7-10 Year Treasury Bond ETF,,,USD,13.678938,IEF,NASDAQ:IEF
 NASDAQ:IXUS,NASDAQ,MAIN,IXUS,iShares Core MSCI Total International Stock ETF,,,USD,13.989376,IXUS,NASDAQ:IXUS
 NASDAQ:IUSG,NASDAQ,MAIN,IUSG,iShares Core S&P U.S. Growth ETF,,,USD,6.186326,IUSG,NASDAQ:IUSG
-NASDAQ:IUSV,NASDAQ,MAIN,IUSV,iShares Core S&P U.S. Value ETF,,,USD,5.362854,IUSV,NASDAQ:IUSV
-NASDAQ:IGIB,NASDAQ,MAIN,IGIB,iShares Intermediate-Term Corporate Bond ETF,,,USD,6.182101,IGIB,NASDAQ:IGIB
-NASDAQ:EMB,NASDAQ,MAIN,EMB,iShares J.P. Morgan USD Emerging Markets Bond ETF,,,USD,14.538944,EMB,NASDAQ:EMB
+NASDAQ:IUSV,NASDAQ,MAIN,IUSV,iShares Core S&P U.S. Value ETF,,,USD,5.351976,IUSV,NASDAQ:IUSV
+NASDAQ:IGIB,NASDAQ,MAIN,IGIB,iShares Intermediate-Term Corporate Bond ETF,,,USD,6.187643,IGIB,NASDAQ:IGIB
+NASDAQ:EMB,NASDAQ,MAIN,EMB,iShares J.P. Morgan USD Emerging Markets Bond ETF,,,USD,14.495152,EMB,NASDAQ:EMB
 NASDAQ:MBB,NASDAQ,MAIN,MBB,iShares MBS ETF,,,USD,16.35082,MBB,NASDAQ:MBB
 NASDAQ:ACWI,NASDAQ,MAIN,ACWI,iShares MSCI ACWI Index Fund,,,USD,10.337454,ACWI,NASDAQ:ACWI
-NASDAQ:SCZ,NASDAQ,MAIN,SCZ,iShares MSCI EAFE Small-Cap ETF,,,USD,9.321928,SCZ,NASDAQ:SCZ
-NASDAQ:IBB,NASDAQ,MAIN,IBB,iShares Nasdaq Biotechnology Index Fund,,,USD,7.40341,IBB,NASDAQ:IBB
+NASDAQ:SCZ,NASDAQ,MAIN,SCZ,iShares MSCI EAFE Small-Cap ETF,,,USD,9.641016,SCZ,NASDAQ:SCZ
+NASDAQ:IBB,NASDAQ,MAIN,IBB,iShares Nasdaq Biotechnology Index Fund,,,USD,7.40862,IBB,NASDAQ:IBB
 NASDAQ:PFF,NASDAQ,MAIN,PFF,iShares Preferred and Income Securities ETF,,,USD,14.841694,PFF,NASDAQ:PFF
 NASDAQ:IJT,NASDAQ,MAIN,IJT,iShares S&P Small-Cap 600 Growth ETF,,,USD,5.402936,IJT,NASDAQ:IJT
-NASDAQ:DVY,NASDAQ,MAIN,DVY,iShares Select Dividend ETF,,,USD,16.989,DVY,NASDAQ:DVY
-NASDAQ:SHV,NASDAQ,MAIN,SHV,iShares Short Treasury Bond ETF,,,USD,20.308035,SHV,NASDAQ:SHV
-NASDAQ:IGSB,NASDAQ,MAIN,IGSB,iShares Short-Term Corporate Bond ETF,,,USD,11.3399595,IGSB,NASDAQ:IGSB
+NASDAQ:DVY,NASDAQ,MAIN,DVY,iShares Select Dividend ETF,,,USD,17.003562,DVY,NASDAQ:DVY
+NASDAQ:SHV,NASDAQ,MAIN,SHV,iShares Short Treasury Bond ETF,,,USD,20.330145,SHV,NASDAQ:SHV
+NASDAQ:IGSB,NASDAQ,MAIN,IGSB,iShares Short-Term Corporate Bond ETF,,,USD,11.2976955,IGSB,NASDAQ:IGSB
 NASDAQ:JBHT,NASDAQ,MAIN,JBHT,"J.B. Hunt Transport Services, Inc.",Transportation,Trucking Freight/Courier Services,USD,9.70603358918,JBHT,NASDAQ:JBHT
 NASDAQ:JKHY,NASDAQ,MAIN,JKHY,"Jack Henry & Associates, Inc.",Technology,EDP Services,USD,10.228711720989999,JKHY,NASDAQ:JKHY
 NASDAQ:JAZZ,NASDAQ,MAIN,JAZZ,Jazz Pharmaceuticals plc,Health Care,Major Pharmaceuticals,USD,7.74891746876,JAZZ,NASDAQ:JAZZ
@@ -530,7 +530,7 @@ NASDAQ:MDB,NASDAQ,MAIN,MDB,"MongoDB, Inc.",Technology,Computer Software: Prepack
 NASDAQ:MPWR,NASDAQ,MAIN,MPWR,"Monolithic Power Systems, Inc.",Technology,Semiconductors,USD,5.13842238,MPWR,NASDAQ:MPWR
 NASDAQ:MNST,NASDAQ,MAIN,MNST,Monster Beverage Corporation,Consumer Non-Durables,Beverages (Production/Distribution),USD,34.47360235032,MNST,NASDAQ:MNST
 NASDAQ:MORN,NASDAQ,MAIN,MORN,"Morningstar, Inc.",Finance,Investment Managers,USD,5.82591728154,MORN,NASDAQ:MORN
-NASDAQ:MYL,NASDAQ,MAIN,MYL,Mylan N.V.,Health Care,Major Pharmaceuticals,USD,9.7829957784,MYL,NASDAQ:MYL
+NASDAQ:MYL,NASDAQ,MAIN,MYL,Mylan N.V.,Health Care,Major Pharmaceuticals,USD,9.78347012656,MYL,NASDAQ:MYL
 NASDAQ:NDAQ,NASDAQ,MAIN,NDAQ,"Nasdaq, Inc.",Finance,Investment Bankers/Brokers/Service,USD,14.918377035299999,NDAQ,NASDAQ:NDAQ
 NASDAQ:NATI,NASDAQ,MAIN,NATI,National Instruments Corporation,Technology,Computer Software: Prepackaged Software,USD,5.28255889038,NATI,NASDAQ:NATI
 NASDAQ:NKTR,NASDAQ,MAIN,NKTR,Nektar Therapeutics,Health Care,Major Pharmaceuticals,USD,5.88983336105,NKTR,NASDAQ:NKTR
@@ -602,8 +602,8 @@ NASDAQ:SBUX,NASDAQ,MAIN,SBUX,Starbucks Corporation,Consumer Services,Restaurants
 NASDAQ:STLD,NASDAQ,MAIN,STLD,"Steel Dynamics, Inc.",Basic Industries,Steel/Iron Ore,USD,6.0339556053,STLD,NASDAQ:STLD
 NASDAQ:STNE,NASDAQ,MAIN,STNE,StoneCo Ltd.,Technology,EDP Services,USD,7.730692693479999,STNE,NASDAQ:STNE
 NASDAQ:SIVB,NASDAQ,MAIN,SIVB,SVB Financial Group,Finance,Major Banks,USD,11.685306874,SIVB,NASDAQ:SIVB
-NASDAQ:SYMC,NASDAQ,MAIN,SYMC,Symantec Corporation,Technology,Computer Software: Prepackaged Software,USD,12.68845989155,SYMC,NASDAQ:SYMC
-NASDAQ:SNPS,NASDAQ,MAIN,SNPS,"Synopsys, Inc.",Technology,Computer Software: Prepackaged Software,USD,17.377631619040002,SNPS,NASDAQ:SNPS
+NASDAQ:SYMC,NASDAQ,MAIN,SYMC,Symantec Corporation,Technology,Computer Software: Prepackaged Software,USD,12.27114841875,SYMC,NASDAQ:SYMC
+NASDAQ:SNPS,NASDAQ,MAIN,SNPS,"Synopsys, Inc.",Technology,Computer Software: Prepackaged Software,USD,17.494725711650002,SNPS,NASDAQ:SNPS
 NASDAQ:TROW,NASDAQ,MAIN,TROW,"T. Rowe Price Group, Inc.",Finance,Investment Bankers/Brokers/Service,USD,24.53432451375,TROW,NASDAQ:TROW
 NASDAQ:TTWO,NASDAQ,MAIN,TTWO,"Take-Two Interactive Software, Inc.",Technology,Computer Software: Prepackaged Software,USD,11.81910843502,TTWO,NASDAQ:TTWO
 NASDAQ:AMTD,NASDAQ,MAIN,AMTD,TD Ameritrade Holding Corporation,Finance,Investment Bankers/Brokers/Service,USD,28.76076463526,AMTD,NASDAQ:AMTD
@@ -624,14 +624,14 @@ NASDAQ:UBNT,NASDAQ,MAIN,UBNT,"Ubiquiti Networks, Inc.",Technology,Radio And Tele
 NASDAQ:ULTA,NASDAQ,MAIN,ULTA,"Ulta Beauty, Inc.",Consumer Services,Other Specialty Stores,USD,19.68628216142,ULTA,NASDAQ:ULTA
 NASDAQ:UAL,NASDAQ,MAIN,UAL,"United Continental Holdings, Inc.",Transportation,Air Freight/Delivery Services,USD,21.25822398363,UAL,NASDAQ:UAL
 NASDAQ:OLED,NASDAQ,MAIN,OLED,Universal Display Corporation,Capital Goods,Electrical Products,USD,7.086402844399999,OLED,NASDAQ:OLED
-NASDAQ:VNQI,NASDAQ,MAIN,VNQI,Vanguard Global ex-U.S. Real Estate ETF,,,USD,5.8473579164,VNQI,NASDAQ:VNQI
-NASDAQ:VCIT,NASDAQ,MAIN,VCIT,Vanguard Intermediate-Term Corporate Bond ETF,,,USD,24.03421072656,VCIT,NASDAQ:VCIT
-NASDAQ:VMBS,NASDAQ,MAIN,VMBS,Vanguard Mortgage-Backed Securities ETF,,,USD,8.74415764695,VMBS,NASDAQ:VMBS
-NASDAQ:VCSH,NASDAQ,MAIN,VCSH,Vanguard Short-Term Corporate Bond ETF,,,USD,23.75709203725,VCSH,NASDAQ:VCSH
+NASDAQ:VNQI,NASDAQ,MAIN,VNQI,Vanguard Global ex-U.S. Real Estate ETF,,,USD,5.87064146715,VNQI,NASDAQ:VNQI
+NASDAQ:VCIT,NASDAQ,MAIN,VCIT,Vanguard Intermediate-Term Corporate Bond ETF,,,USD,24.069138726560002,VCIT,NASDAQ:VCIT
+NASDAQ:VMBS,NASDAQ,MAIN,VMBS,Vanguard Mortgage-Backed Securities ETF,,,USD,8.76769714695,VMBS,NASDAQ:VMBS
+NASDAQ:VCSH,NASDAQ,MAIN,VCSH,Vanguard Short-Term Corporate Bond ETF,,,USD,23.64544203725,VCSH,NASDAQ:VCSH
 NASDAQ:VTIP,NASDAQ,MAIN,VTIP,Vanguard Short-Term Inflation-Protected Securities Index Fund,,,USD,6.092881794,VTIP,NASDAQ:VTIP
-NASDAQ:BND,NASDAQ,MAIN,BND,Vanguard Total Bond Market ETF,,,USD,39.31414919718,BND,NASDAQ:BND
-NASDAQ:BNDX,NASDAQ,MAIN,BNDX,Vanguard Total International Bond ETF,,,USD,17.0190371204,BNDX,NASDAQ:BNDX
-NASDAQ:VXUS,NASDAQ,MAIN,VXUS,Vanguard Total International Stock ETF,,,USD,12.083181956219999,VXUS,NASDAQ:VXUS
+NASDAQ:BND,NASDAQ,MAIN,BND,Vanguard Total Bond Market ETF,,,USD,39.49347119718,BND,NASDAQ:BND
+NASDAQ:BNDX,NASDAQ,MAIN,BNDX,Vanguard Total International Bond ETF,,,USD,17.049351175600002,BNDX,NASDAQ:BNDX
+NASDAQ:VXUS,NASDAQ,MAIN,VXUS,Vanguard Total International Stock ETF,,,USD,12.10486076238,VXUS,NASDAQ:VXUS
 NASDAQ:VRSN,NASDAQ,MAIN,VRSN,"VeriSign, Inc.",Technology,EDP Services,USD,23.20857549807,VRSN,NASDAQ:VRSN
 NASDAQ:VRSK,NASDAQ,MAIN,VRSK,"Verisk Analytics, Inc.",Technology,EDP Services,USD,23.274892370919996,VRSK,NASDAQ:VRSK
 NASDAQ:VRTX,NASDAQ,MAIN,VRTX,Vertex Pharmaceuticals Incorporated,Health Care,Major Pharmaceuticals,USD,43.993966007199994,VRTX,NASDAQ:VRTX
@@ -766,7 +766,7 @@ NYSE:BCE,NYSE,MAIN,BCE,"BCE, Inc.",Public Utilities,Telecommunications Equipment
 NYSE:BDX,NYSE,MAIN,BDX,"Becton, Dickinson and Company",Health Care,Medical/Dental Instruments,USD,63.43824626657,BDX,NYSE:BDX
 NYSE:BMS,NYSE,MAIN,BMS,"Bemis Company, Inc.",Consumer Durables,Containers/Packaging,USD,5.2355681686,BMS,NYSE:BMS
 NYSE:BERY,NYSE,MAIN,BERY,"Berry Global Group, Inc.",Consumer Non-Durables,Plastic Products,USD,6.299692,BERY,NYSE:BERY
-NYSE:BBY,NYSE,MAIN,BBY,"Best Buy Co., Inc.",Consumer Services,Consumer Electronics/Video Chains,USD,17.659021344720003,BBY,NYSE:BBY
+NYSE:BBY,NYSE,MAIN,BBY,"Best Buy Co., Inc.",Consumer Services,Consumer Electronics/Video Chains,USD,17.635815344279997,BBY,NYSE:BBY
 NYSE:BHP,NYSE,MAIN,BHP,BHP Group Limited,Basic Industries,Precious Metals,USD,132.69568,BHP,NYSE:BHP
 NYSE:BIO,NYSE,MAIN,BIO,"Bio-Rad Laboratories, Inc.",Capital Goods,Biotechnology: Laboratory Analytical Instruments,USD,8.748315989489999,BIO,NYSE:BIO
 NYSE:BKI,NYSE,MAIN,BKI,"Black Knight, Inc.",Technology,Computer Software: Prepackaged Software,USD,8.49693614835,BKI,NYSE:BKI
@@ -797,7 +797,7 @@ NYSE:CACI,NYSE,MAIN,CACI,"CACI International, Inc.",Technology,EDP Services,USD,
 NYSE:CAE,NYSE,MAIN,CAE,CAE Inc,Miscellaneous,Industrial Machinery/Components,USD,6.686367905439999,CAE,NYSE:CAE
 NYSE:CPT,NYSE,MAIN,CPT,Camden Property Trust,Consumer Services,Real Estate Investment Trusts,USD,10.083685513299999,CPT,NYSE:CPT
 NYSE:CPB,NYSE,MAIN,CPB,Campbell Soup Company,Consumer Non-Durables,Packaged Foods,USD,11.300958615059999,CPB,NYSE:CPB
-NYSE:CM,NYSE,MAIN,CM,Canadian Imperial Bank of Commerce,Finance,Commercial Banks,USD,34.57181035112,CM,NYSE:CM
+NYSE:CM,NYSE,MAIN,CM,Canadian Imperial Bank of Commerce,Finance,Commercial Banks,USD,34.612608863839995,CM,NYSE:CM
 NYSE:CNI,NYSE,MAIN,CNI,Canadian National Railway Company,Transportation,Railroads,USD,66.15143123967,CNI,NYSE:CNI
 NYSE:CNQ,NYSE,MAIN,CNQ,Canadian Natural Resources Limited,Energy,Oil & Gas Production,USD,31.146768822,CNQ,NYSE:CNQ
 NYSE:CP,NYSE,MAIN,CP,Canadian Pacific Railway Limited,Transportation,Railroads,USD,31.249850013,CP,NYSE:CP
@@ -818,7 +818,7 @@ NYSE:CBS,NYSE,MAIN,CBS,CBS Corporation,Consumer Services,Broadcasting,USD,16.710
 NYSE:CE,NYSE,MAIN,CE,Celanese Corporation,Basic Industries,Major Chemicals,USD,12.582749454959998,CE,NYSE:CE
 NYSE:CX,NYSE,MAIN,CX,Cemex S.A.B. de C.V.,Capital Goods,Building Materials,USD,6.38022044011,CX,NYSE:CX
 NYSE:CVE,NYSE,MAIN,CVE,Cenovus Energy Inc,Energy,Oil & Gas Production,USD,10.13676317775,CVE,NYSE:CVE
-NYSE:CNC,NYSE,MAIN,CNC,Centene Corporation,Health Care,Medical Specialities,USD,23.5055174992,CNC,NYSE:CNC
+NYSE:CNC,NYSE,MAIN,CNC,Centene Corporation,Health Care,Medical Specialities,USD,23.5081773091,CNC,NYSE:CNC
 NYSE:CNP,NYSE,MAIN,CNP,"CenterPoint Energy, Inc.",Public Utilities,Electric Utilities: Central,USD,14.758889774790001,CNP,NYSE:CNP
 NYSE:EBR,NYSE,MAIN,EBR,Centrais Electricas Brasileiras S.A.- Eletrobras,Public Utilities,Electric Utilities: Central,USD,11.105125961,EBR,NYSE:EBR
 NYSE:CTL,NYSE,MAIN,CTL,"CenturyLink, Inc.",Public Utilities,Telecommunications Equipment,USD,11.023068615540002,CTL,NYSE:CTL
@@ -866,7 +866,7 @@ NYSE:COTY,NYSE,MAIN,COTY,Coty Inc.,Consumer Non-Durables,Package Goods/Cosmetics
 NYSE:CPL,NYSE,MAIN,CPL,CPFL Energia S.A.,Public Utilities,Electric Utilities: Central,USD,7.5427482678599995,CPL,NYSE:CPL
 NYSE:BAP,NYSE,MAIN,BAP,Credicorp Ltd.,Finance,Commercial Banks,USD,17.63356188,BAP,NYSE:BAP
 NYSE:CS,NYSE,MAIN,CS,Credit Suisse Group,Finance,Investment Bankers/Brokers/Service,USD,29.190792,CS,NYSE:CS
-NYSE:CRH,NYSE,MAIN,CRH,CRH PLC,Capital Goods,Building Materials,USD,25.6443904773,CRH,NYSE:CRH
+NYSE:CRH,NYSE,MAIN,CRH,CRH PLC,Capital Goods,Building Materials,USD,25.6383427773,CRH,NYSE:CRH
 NYSE:CCI,NYSE,MAIN,CCI,Crown Castle International Corporation,Consumer Services,Real Estate Investment Trusts,USD,53.14420207005,CCI,NYSE:CCI
 NYSE:CCK,NYSE,MAIN,CCK,"Crown Holdings, Inc.",Consumer Durables,Containers/Packaging,USD,8.12438192088,CCK,NYSE:CCK
 NYSE:CUBE,NYSE,MAIN,CUBE,CubeSmart,Consumer Services,Real Estate Investment Trusts,USD,6.36278490992,CUBE,NYSE:CUBE
@@ -999,7 +999,7 @@ NYSE:HP,NYSE,MAIN,HP,"Helmerich & Payne, Inc.",Energy,Oil & Gas Production,USD,5
 NYSE:HLF,NYSE,MAIN,HLF,Herbalife Nutrition Ltd.,Health Care,Other Pharmaceuticals,USD,6.44204871556,HLF,NYSE:HLF
 NYSE:HSY,NYSE,MAIN,HSY,Hershey Company (The),Consumer Non-Durables,Specialty Foods,USD,27.1836082069,HSY,NYSE:HSY
 NYSE:HES,NYSE,MAIN,HES,Hess Corporation,Energy,Integrated oil Companies,USD,18.045497883310002,HES,NYSE:HES
-NYSE:HPE,NYSE,MAIN,HPE,Hewlett Packard Enterprise Company,Technology,Computer Manufacturing,USD,19.71974354993,HPE,NYSE:HPE
+NYSE:HPE,NYSE,MAIN,HPE,Hewlett Packard Enterprise Company,Technology,Computer Manufacturing,USD,19.36894,HPE,NYSE:HPE
 NYSE:HXL,NYSE,MAIN,HXL,Hexcel Corporation,Basic Industries,Major Chemicals,USD,6.29275344453,HXL,NYSE:HXL
 NYSE:HRC,NYSE,MAIN,HRC,Hill-Rom Holdings Inc,Health Care,Medical/Dental Instruments,USD,6.49765601057,HRC,NYSE:HRC
 NYSE:HLT,NYSE,MAIN,HLT,Hilton Worldwide Holdings Inc.,Consumer Services,Hotels/Resorts,USD,26.16944205231,HLT,NYSE:HLT
@@ -1033,7 +1033,7 @@ NYSE:IFF,NYSE,MAIN,IFF,"International Flavors & Fragrances, Inc.",Basic Industri
 NYSE:IP,NYSE,MAIN,IP,International Paper Company,Basic Industries,Paper,USD,16.99397415352,IP,NYSE:IP
 NYSE:IPG,NYSE,MAIN,IPG,"Interpublic Group of Companies, Inc. (The)",Technology,Advertising,USD,8.5535621431,IPG,NYSE:IPG
 NYSE:INXN,NYSE,MAIN,INXN,InterXion Holding N.V.,Technology,"Computer Software: Programming, Data Processing",USD,5.33756209,INXN,NYSE:INXN
-NYSE:IVZ,NYSE,MAIN,IVZ,Invesco Plc,Finance,Investment Managers,USD,8.18551527542,IVZ,NYSE:IVZ
+NYSE:IVZ,NYSE,MAIN,IVZ,Invesco Plc,Finance,Investment Managers,USD,9.73164855372,IVZ,NYSE:IVZ
 NYSE:INVH,NYSE,MAIN,INVH,Invitation Homes Inc.,Finance,Real Estate,USD,13.52901691035,INVH,NYSE:INVH
 NYSE:IQV,NYSE,MAIN,IQV,"IQVIA Holdings, Inc.",Health Care,Biotechnology: Commercial Physical & Biological Resarch,USD,26.899686393240003,IQV,NYSE:IQV
 NYSE:IRM,NYSE,MAIN,IRM,Iron Mountain Incorporated,Consumer Services,Real Estate Investment Trusts,USD,8.98223286971,IRM,NYSE:IRM
@@ -1086,7 +1086,7 @@ NYSE:LNC,NYSE,MAIN,LNC,Lincoln National Corporation,Finance,Life Insurance,USD,1
 NYSE:LIN,NYSE,MAIN,LIN,Linde plc,Basic Industries,Major Chemicals,USD,101.96406096204,LIN,NYSE:LIN
 NYSE:LN,NYSE,MAIN,LN,LINE Corporation,Technology,"Computer Software: Programming, Data Processing",USD,7.20474428184,LN,NYSE:LN
 NYSE:LYV,NYSE,MAIN,LYV,"Live Nation Entertainment, Inc.",Consumer Services,Services-Misc. Amusement & Recreation,USD,13.25952774776,LYV,NYSE:LYV
-NYSE:LYG,NYSE,MAIN,LYG,Lloyds Banking Group Plc,Finance,Commercial Banks,USD,52.27777693,LYG,NYSE:LYG
+NYSE:LYG,NYSE,MAIN,LYG,Lloyds Banking Group Plc,Finance,Commercial Banks,USD,52.26725284536,LYG,NYSE:LYG
 NYSE:LMT,NYSE,MAIN,LMT,Lockheed Martin Corporation,Capital Goods,Military/Government/Technical,USD,95.71849771302,LMT,NYSE:LMT
 NYSE:L,NYSE,MAIN,L,Loews Corporation,Finance,Property-Casualty Insurers,USD,15.9012999257,L,NYSE:L
 NYSE:LOW,NYSE,MAIN,LOW,"Lowe&#39;s Companies, Inc.",Consumer Services,RETAIL: Building Materials,USD,75.90714952028999,LOW,NYSE:LOW
@@ -1150,7 +1150,7 @@ NYSE:JWN,NYSE,MAIN,JWN,"Nordstrom, Inc.",Consumer Services,Clothing/Shoe/Accesso
 NYSE:NSC,NYSE,MAIN,NSC,Norfolk Souther Corporation,Transportation,Railroads,USD,52.99925186153,NSC,NYSE:NSC
 NYSE:NOC,NYSE,MAIN,NOC,Northrop Grumman Corporation,Capital Goods,Industrial Machinery/Components,USD,52.98938582553,NOC,NYSE:NOC
 NYSE:NCLH,NYSE,MAIN,NCLH,Norwegian Cruise Line Holdings Ltd.,Consumer Services,Marine Transportation,USD,11.92859758428,NCLH,NYSE:NCLH
-NYSE:NVS,NYSE,MAIN,NVS,Novartis AG,Health Care,Major Pharmaceuticals,USD,203.29390183392002,NVS,NYSE:NVS
+NYSE:NVS,NYSE,MAIN,NVS,Novartis AG,Health Care,Major Pharmaceuticals,USD,200.7966826464,NVS,NYSE:NVS
 NYSE:NVO,NYSE,MAIN,NVO,Novo Nordisk A/S,Health Care,Major Pharmaceuticals,USD,115.48294956613,NVO,NYSE:NVO
 NYSE:NRG,NYSE,MAIN,NRG,"NRG Energy, Inc.",Public Utilities,Electric Utilities: Central,USD,9.49195614499,NRG,NYSE:NRG
 NYSE:NUE,NYSE,MAIN,NUE,Nucor Corporation,Basic Industries,Steel/Iron Ore,USD,15.59283569576,NUE,NYSE:NUE
@@ -1210,7 +1210,6 @@ NYSE:TLK,NYSE,MAIN,TLK,"PT Telekomunikasi Indonesia, Tbk",Public Utilities,Telec
 NYSE:PEG,NYSE,MAIN,PEG,Public Service Enterprise Group Incorporated,Public Utilities,Power Generation,USD,30.91212772868,PEG,NYSE:PEG
 NYSE:PSA,NYSE,MAIN,PSA,Public Storage,Consumer Services,Real Estate Investment Trusts,USD,41.227313634059996,PSA,NYSE:PSA
 NYSE:PHM,NYSE,MAIN,PHM,"PulteGroup, Inc.",Capital Goods,Homebuilding,USD,8.90164406956,PHM,NYSE:PHM
-NYSE:PVH,NYSE,MAIN,PVH,PVH Corp.,Consumer Non-Durables,Apparel,USD,8.02689363392,PVH,NYSE:PVH
 NYSE:QGEN,NYSE,MAIN,QGEN,Qiagen N.V.,Health Care,Biotechnology: Biological Products (No Diagnostic Substances),USD,8.6701012,QGEN,NYSE:QGEN
 NYSE:DGX,NYSE,MAIN,DGX,Quest Diagnostics Incorporated,Health Care,Medical Specialities,USD,13.17413294124,DGX,NYSE:DGX
 NYSE:RL,NYSE,MAIN,RL,Ralph Lauren Corporation,Consumer Non-Durables,Apparel,USD,8.52876629068,RL,NYSE:RL
@@ -1221,19 +1220,19 @@ NYSE:RHT,NYSE,MAIN,RHT,"Red Hat, Inc.",Technology,"Computer Software: Programmin
 NYSE:RF,NYSE,MAIN,RF,Regions Financial Corporation,Finance,Major Banks,USD,14.37766158642,RF,NYSE:RF
 NYSE:RGA,NYSE,MAIN,RGA,"Reinsurance Group of America, Incorporated",Finance,Life Insurance,USD,9.43106208413,RGA,NYSE:RGA
 NYSE:RS,NYSE,MAIN,RS,Reliance Steel & Aluminum Co.,Basic Industries,Metal Fabrications,USD,5.71299040854,RS,NYSE:RS
-NYSE:RELX,NYSE,MAIN,RELX,RELX PLC,Consumer Services,Publishing,USD,45.36299621896,RELX,NYSE:RELX
+NYSE:RELX,NYSE,MAIN,RELX,RELX PLC,Consumer Services,Publishing,USD,45.35483623664,RELX,NYSE:RELX
 NYSE:RNR,NYSE,MAIN,RNR,RenaissanceRe Holdings Ltd.,Finance,Property-Casualty Insurers,USD,7.6625227771199995,RNR,NYSE:RNR
 NYSE:RSG,NYSE,MAIN,RSG,"Republic Services, Inc.",Public Utilities,Environmental Services,USD,27.19332070056,RSG,NYSE:RSG
 NYSE:RMD,NYSE,MAIN,RMD,ResMed Inc.,Health Care,Medical/Dental Instruments,USD,16.33098674459,RMD,NYSE:RMD
 NYSE:QSR,NYSE,MAIN,QSR,Restaurant Brands International Inc.,Consumer Services,Restaurants,USD,17.37348487809,QSR,NYSE:QSR
 NYSE:RNG,NYSE,MAIN,RNG,"Ringcentral, Inc.",Technology,EDP Services,USD,9.97359949984,RNG,NYSE:RNG
-NYSE:RIO,NYSE,MAIN,RIO,Rio Tinto Plc,Basic Industries,Precious Metals,USD,101.23819770113,RIO,NYSE:RIO
+NYSE:RIO,NYSE,MAIN,RIO,Rio Tinto Plc,Basic Industries,Precious Metals,USD,101.23283741501,RIO,NYSE:RIO
 NYSE:RHI,NYSE,MAIN,RHI,Robert Half International Inc.,Technology,Professional Services,USD,6.67597552788,RHI,NYSE:RHI
 NYSE:ROK,NYSE,MAIN,ROK,"Rockwell Automation, Inc.",Capital Goods,Industrial Machinery/Components,USD,18.32007639642,ROK,NYSE:ROK
 NYSE:RCI,NYSE,MAIN,RCI,"Rogers Communication, Inc.",Consumer Services,Television Services,USD,21.268991386419998,RCI,NYSE:RCI
 NYSE:ROL,NYSE,MAIN,ROL,"Rollins, Inc.",Finance,Diversified Commercial Services,USD,12.12842782746,ROL,NYSE:ROL
 NYSE:ROP,NYSE,MAIN,ROP,"Roper Technologies, Inc.",Capital Goods,Industrial Machinery/Components,USD,36.14394209105,ROP,NYSE:ROP
-NYSE:RY,NYSE,MAIN,RY,Royal Bank Of Canada,Finance,Commercial Banks,USD,110.90707967876,RY,NYSE:RY
+NYSE:RY,NYSE,MAIN,RY,Royal Bank Of Canada,Finance,Commercial Banks,USD,110.91306856492,RY,NYSE:RY
 NYSE:RBS,NYSE,MAIN,RBS,Royal Bank Scotland plc (The),Finance,Commercial Banks,USD,34.09393597476,RBS,NYSE:RBS
 NYSE:RCL,NYSE,MAIN,RCL,Royal Caribbean Cruises Ltd.,Consumer Services,Marine Transportation,USD,25.92924905632,RCL,NYSE:RCL
 NYSE:RPM,NYSE,MAIN,RPM,RPM International Inc.,Basic Industries,Paints/Coatings,USD,7.209139905,RPM,NYSE:RPM
@@ -1327,7 +1326,7 @@ NYSE:TOL,NYSE,MAIN,TOL,"Toll Brothers, Inc.",Capital Goods,Homebuilding,USD,5.29
 NYSE:TMK,NYSE,MAIN,TMK,Torchmark Corporation,Finance,Life Insurance,USD,9.58571437475,TMK,NYSE:TMK
 NYSE:TTC,NYSE,MAIN,TTC,Toro Company (The),Capital Goods,Tools/Hardware,USD,6.9969181275,TTC,NYSE:TTC
 NYSE:TD,NYSE,MAIN,TD,Toronto Dominion Bank (The),Finance,Commercial Banks,USD,103.52274959904,TD,NYSE:TD
-NYSE:TOT,NYSE,MAIN,TOT,Total S.A.,Energy,Oil & Gas Production,USD,139.48133798720002,TOT,NYSE:TOT
+NYSE:TOT,NYSE,MAIN,TOT,Total S.A.,Energy,Oil & Gas Production,USD,139.40057463968,TOT,NYSE:TOT
 NYSE:TSS,NYSE,MAIN,TSS,"Total System Services, Inc.",Miscellaneous,Business Services,USD,20.074197077450002,TSS,NYSE:TSS
 NYSE:TM,NYSE,MAIN,TM,Toyota Motor Corp Ltd Ord,Capital Goods,Auto Manufacturing,USD,167.89283156464998,TM,NYSE:TM
 NYSE:TDG,NYSE,MAIN,TDG,Transdigm Group Incorporated,Capital Goods,Military/Government/Technical,USD,23.712923652599997,TDG,NYSE:TDG
@@ -1354,7 +1353,7 @@ NYSE:UNH,NYSE,MAIN,UNH,UnitedHealth Group Incorporated,Health Care,Medical Speci
 NYSE:UHS,NYSE,MAIN,UHS,"Universal Health Services, Inc.",Health Care,Hospital/Nursing Management,USD,11.095336785059999,UHS,NYSE:UHS
 NYSE:UNM,NYSE,MAIN,UNM,Unum Group,Finance,Accident &Health Insurance,USD,7.201822953600001,UNM,NYSE:UNM
 NYSE:USFD,NYSE,MAIN,USFD,US Foods Holding Corp.,Consumer Non-Durables,Food Distributors,USD,8.09964026982,USFD,NYSE:USFD
-NYSE:VFC,NYSE,MAIN,VFC,V.F. Corporation,Consumer Non-Durables,Apparel,USD,33.246681513759995,VFC,NYSE:VFC
+NYSE:VFC,NYSE,MAIN,VFC,V.F. Corporation,Consumer Non-Durables,Apparel,USD,33.37611025716,VFC,NYSE:VFC
 NYSE:MTN,NYSE,MAIN,MTN,"Vail Resorts, Inc.",Consumer Services,Services-Misc. Amusement & Recreation,USD,8.63079560259,MTN,NYSE:MTN
 NYSE:VALE,NYSE,MAIN,VALE,VALE S.A.,Basic Industries,Precious Metals,USD,61.64195513314,VALE,NYSE:VALE
 NYSE:VLO,NYSE,MAIN,VLO,Valero Energy Corporation,Energy,Integrated oil Companies,USD,31.80214339522,VLO,NYSE:VLO
@@ -1366,7 +1365,7 @@ NYSE:VER,NYSE,MAIN,VER,VEREIT Inc.,Consumer Services,Real Estate Investment Trus
 NYSE:VZ,NYSE,MAIN,VZ,Verizon Communications Inc.,Public Utilities,Telecommunications Equipment,USD,245.33011824072,VZ,NYSE:VZ
 NYSE:VSM,NYSE,MAIN,VSM,"Versum Materials, Inc.",Basic Industries,Major Chemicals,USD,5.60515555607,VSM,NYSE:VSM
 NYSE:VICI,NYSE,MAIN,VICI,VICI Properties Inc.,Consumer Services,Real Estate Investment Trusts,USD,9.35782390125,VICI,NYSE:VICI
-NYSE:VIPS,NYSE,MAIN,VIPS,Vipshop Holdings Limited,Consumer Services,Catalog/Specialty Distribution,USD,5.08366371825,VIPS,NYSE:VIPS
+NYSE:VIPS,NYSE,MAIN,VIPS,Vipshop Holdings Limited,Consumer Services,Catalog/Specialty Distribution,USD,5.0911249545,VIPS,NYSE:VIPS
 NYSE:V,NYSE,MAIN,V,Visa Inc.,Miscellaneous,Business Services,USD,355.43119253912,V,NYSE:V
 NYSE:VST,NYSE,MAIN,VST,Vistra Energy Corp.,Public Utilities,Electric Utilities: Central,USD,11.81441490624,VST,NYSE:VST
 NYSE:VMW,NYSE,MAIN,VMW,"Vmware, Inc.",Technology,Computer Software: Prepackaged Software,USD,81.2286920536,VMW,NYSE:VMW
@@ -1400,7 +1399,7 @@ NYSE:WY,NYSE,MAIN,WY,Weyerhaeuser Company,Consumer Services,Real Estate Investme
 NYSE:WPM,NYSE,MAIN,WPM,Wheaton Precious Metals Corp.,Basic Industries,Precious Metals,USD,9.0379509983,WPM,NYSE:WPM
 NYSE:WHR,NYSE,MAIN,WHR,Whirlpool Corporation,Consumer Durables,Consumer Electronics/Appliances,USD,7.9104404311800005,WHR,NYSE:WHR
 NYSE:WMB,NYSE,MAIN,WMB,"Williams Companies, Inc. (The)",Public Utilities,Natural Gas Distribution,USD,32.70567834576,WMB,NYSE:WMB
-NYSE:WIT,NYSE,MAIN,WIT,Wipro Limited,Technology,EDP Services,USD,26.67387276444,WIT,NYSE:WIT
+NYSE:WIT,NYSE,MAIN,WIT,Wipro Limited,Technology,EDP Services,USD,26.675000053799998,WIT,NYSE:WIT
 NYSE:WF,NYSE,MAIN,WF,Woori Bank,Finance,Commercial Banks,USD,8.2118503757,WF,NYSE:WF
 NYSE:WWE,NYSE,MAIN,WWE,"World Wrestling Entertainment, Inc.",Consumer Services,Movies/Entertainment,USD,5.92130343582,WWE,NYSE:WWE
 NYSE:WP,NYSE,MAIN,WP,"Worldpay, Inc.",Miscellaneous,Business Services,USD,37.34928334093,WP,NYSE:WP
@@ -1417,6 +1416,6 @@ NYSE:ZBH,NYSE,MAIN,ZBH,"Zimmer Biomet Holdings, Inc.",Health Care,Industrial Spe
 NYSE:ZTS,NYSE,MAIN,ZTS,Zoetis Inc.,Health Care,Major Pharmaceuticals,USD,49.0143937536,ZTS,NYSE:ZTS
 NYSE:ZTO,NYSE,MAIN,ZTO,ZTO Express (Cayman) Inc.,Transportation,Trucking Freight/Courier Services,USD,14.14317004915,ZTO,NYSE:ZTO
 S&P500,NYSE,Main,S&P500,S&P500,Macro,Index,USD,0.0,^GSPC,INDEXCBOE: .INX
-VIX,CBOE,Main,VIX,VIX,Macro,Index,USD,0.0,^VIX,INDEXCBOE: VIX
-ISF,LON,MAIN,ISF,iShares FTSE100,Macro,Index,GBP,0.0,ISF.L,LON:ISF
-IGUS,LON,MAIN,IGUS,iShares S&P500 GBP Hedged,Macro,Index,GBP,0.0,IGUS.L,LON:IGUS
+CBOE:VIX,CBOE,Main,VIX,VIX,Macro,Index,USD,0.0,^VIX,INDEXCBOE: VIX
+LON:ISF,LON,MAIN,ISF,iShares FTSE100,Macro,Index,GBP,0.0,ISF.L,LON:ISF
+LON:IGUS,LON,MAIN,IGUS,iShares S&P500 GBP Hedged,Macro,Index,GBP,0.0,IGUS.L,LON:IGUS

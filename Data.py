@@ -214,7 +214,7 @@ def static_data():
     lse = r'instruments-defined-by-mifir-identifiers-list-on-lse.xlsx'
     df_shares = pd.read_excel(lse, sheet_name='1.1 Shares', header=7)
     df_etfs = pd.read_excel(lse, sheet_name='1.3 ETFs', header=7)
-    df_uk = pd.concat([df_shares, df_etfs])
+    df_uk = pd.concat([df_shares, df_etfs], sort=False)
 
     df_uk.rename(columns={'TIDM': 'Symbol',
                           'Issuer Name': 'Name',
@@ -246,7 +246,7 @@ def static_data():
     df_nyse['Exchange'] = 'NYSE'
     df_nyse['Ticker'] = df_nyse['Exchange'] + ':' + df_nyse['Symbol']
 
-    df_us = pd.concat([df_ndq, df_nyse])
+    df_us = pd.concat([df_ndq, df_nyse], sort=False)
     df_us.rename(columns={'Industry': 'Industry Grp'}, inplace=True)
     df_us['MarketCapBillions'] = df_us['MarketCap'] / 1000000000.0
     df_us['Market'] = 'MAIN'
@@ -257,7 +257,7 @@ def static_data():
     cols = ['Exchange', 'Market', 'Ticker', 'Symbol', 'Name', 'Sector', 'Industry Grp', 'CCY', 'MarketCapBillions',
             'YahooTicker']
 
-    df = pd.concat([df_uk[cols], df_us[cols]])
+    df = pd.concat([df_uk[cols], df_us[cols]], sort=False)
 
     df['GoogleTicker'] = df['Ticker'].replace('.', '')
 
@@ -265,48 +265,26 @@ def static_data():
     df = df.set_index('Ticker')
 
     # Apply exceptions
-    df_ticker_exceptions = pd.DataFrame.from_csv('{}'.format(Cp.files['TickerExceptions']))
+    df_ticker_exceptions = pd.read_csv('{}'.format(Cp.files['TickerExceptions']), index_col=0)
     for ticker, row in df_ticker_exceptions.iterrows():
-        df.set_value(ticker, 'YahooTicker', row['YahooTicker'])
-        df.set_value(ticker, 'GoogleTicker', row['GoogleTicker'])
+        df.at[ticker, 'YahooTicker'] = row['YahooTicker']
+        df.at[ticker, 'GoogleTicker'] = row['GoogleTicker']
 
     df = df[(df['Sector'] != 'n/a') & (df['Industry Grp'] != 'n/a')]
 
     df.to_csv('TickerMaster.csv')
 
 
-def temp_1():
-    tickers = ['NYSE:SPY', 'LON:ISF', 'LON:RDSB', 'NASDAQ:MSFT', 'NASDAQ:AAPL', 'NASDAQ:FB', 'NYSE:XOM', 'NYSE:GS',
-               'NYSE:JPM', 'NYSE:BA']
-    df = create_df_from_tickers(tickers)
-    df = df.reset_index()
-    df.rename(columns={'index': 'Date'}, inplace=True)
-    df.to_csv('stock_prices.csv', index=False)
-
-    print(df.tail())
-
-
-def temp_2():
-    yahoo_ticker = 'MSFT'
-    df = pdr.data.get_data_yahoo(yahoo_ticker)
-    df = df.drop(['Open', 'High', 'Low', 'Close', 'Volume'], axis=1)
-    df = df[df['Adj Close'].astype(str) != 'null']
-    df['Adj Close'] = df['Adj Close'].astype(float)
-    #df.rename(columns={'Adj Close': 'Close_' + yahoo_ticker}, inplace=True)
-    df.to_csv('z_{}.csv'.format(yahoo_ticker))
-    print('Done: {}'.format(yahoo_ticker))
-
 
 if __name__ == "__main__":
     print('Start: ', datetime.today())
     production()
-    # temp_test()
     # static_data()
-    # download_yahoo_eod_data()
     # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='^GSPC', filename=Cp.ticker_benchmark, close_column_name=Cp.ticker_benchmark)
     # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='VUKE.L', filename='LON_VUKE', close_column_name='LON:VUKE')
     # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='MSFT', filename='NYSE_MSFT', close_column_name='NASDAQ:MSFT')
-    # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='XLF', filename='NYSE_XLF', close_column_name='NYSE:XLF')
-    # temp_2()
+    # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='^VIX', filename='CBOE_VIX', close_column_name='CBOE:VIX')
+    # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='ISF.L', filename='LON_ISF', close_column_name='LON:ISF')
+    # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='IGUS.L', filename='LON_IGUS', close_column_name='LON:IGUS')
 
     print('Finished: ', datetime.today())

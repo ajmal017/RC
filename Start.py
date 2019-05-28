@@ -16,6 +16,7 @@ def run_simulation(simulation_name, universe_of_tickers_df, column_to_group_by='
 
     # Only keep tickers that enough data
     tickers = Data.get_tickers_with_good_data(universe_of_tickers)
+    tickers = tickers[:5]
     tickers_df = universe_of_tickers_df[universe_of_tickers_df.index.isin(tickers)]
 
     df = Data.create_df_from_tickers(tickers)
