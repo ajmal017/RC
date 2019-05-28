@@ -6,7 +6,47 @@ import pandas as pd
 
 
 def create_long_short_tickers(tickers, df, ticker_group, signal_lag):
-    return momentum_relative_strength(tickers, df, ticker_group, signal_lag)
+    return rsi(tickers, df, ticker_group, signal_lag)
+    # return momentum_relative_strength(tickers, df, ticker_group, signal_lag)
+
+
+def rsi(tickers, df, ticker_group, signal_lag):
+
+    # Add Relative strength values
+    for ticker in [Cp.ticker_benchmark] + tickers:
+        df['score_' + ticker] = 0.0
+
+        # Calculate the RSI
+        delta = df['Close_{}'.format(ticker)].diff()
+        up, down = delta.copy(), delta.copy()
+
+        up[up < 0] = 0
+        down[down > 0] = 0
+
+        rUp = up.ewm(com=Cp.rsi_period - 1, adjust=False).mean()
+        rDown = down.ewm(com=Cp.rsi_period - 1, adjust=False).mean().abs()
+
+        rsi = 100 - 100 / (1 + rUp / rDown)
+
+        df = df.join(rsi.to_frame('RSI_{}'.format(ticker)))
+        # df['score_' + ticker] = np.where((df['RSI_{}'.format(ticker)] > 30.0) & (df['RSI_{}'.format(ticker)] < 70.0), 0.0, df['RSI_{}'.format(ticker)])
+        df['score_' + ticker] = df['RSI_{}'.format(ticker)]
+
+        # df['score_' + ticker] = df['score_' + ticker] * (-1.0)  # short if above 70, so shorts get lower score i.e. -70
+
+        # Go long 2nd highest, and short the 2nd lowest score
+        df = rank_ticker_scores(tickers, df, ticker_group, 1, len(tickers)-1)
+
+        # Add lag to signal
+        df[ticker_group + '_long_ticker'] = df[ticker_group + '_long_ticker'].shift(signal_lag, axis=0)
+        df[ticker_group + '_short_ticker'] = df[ticker_group + '_short_ticker'].shift(signal_lag, axis=0)
+        df[ticker_group + '_score'].shift(signal_lag)
+
+        df[ticker_group + '_long_ticker'] = df[ticker_group + '_long_ticker'].replace(np.nan, '', regex=True)
+        df[ticker_group + '_short_ticker'] = df[ticker_group + '_short_ticker'].replace(np.nan, '', regex=True)
+        df['score_' + ticker] = df['score_' + ticker].replace(np.nan, 0.0, regex=True)
+
+        return df
 
 
 def momentum_relative_strength(tickers, df, ticker_group, signal_lag):

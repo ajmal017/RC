@@ -110,6 +110,8 @@ pairs_trading = False
 ewma = {'fast': 50, 'slow': 200}
 BollBandFactor = 2.0
 
+rsi_period = 14
+
 maximum_number_of_open_tickers_per_ticker_group = 2
 RelativeStrengthPeriods = [5, 20, 60] # 1w (5), 1m (20), 3m (60), 6m (125), 12m (250)
 

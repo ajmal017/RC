@@ -25,7 +25,7 @@ def create_df_from_tickers(tickers, start_date=None, end_date=None):
     df['Change_pct_USD_GBP'] = df['Close_USD-GBP'].pct_change()
 
     # Create the multi_stock dataframe
-    for ticker in tickers:   # + ['CBOE:VIX']:
+    for ticker in tickers + ['CBOE:VIX']:
         dfa = pd.read_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], ticker.replace(':', '_')), index_col=0)
         df = df.join(dfa, how='inner', rsuffix=ticker)
 
@@ -163,7 +163,7 @@ def download_yahoo_eod_data_for_single_ticker(yahoo_ticker, filename, close_colu
         return False
 
     try:
-        df = df[df['Adj Close'] != 'null']
+        df = df[df['Adj Close'].astype(str) != 'null']
     except:
         pass
 
@@ -212,8 +212,8 @@ def production():
 def static_data():
     # UK Equities
     lse = r'instruments-defined-by-mifir-identifiers-list-on-lse.xlsx'
-    df_shares = pd.read_excel(lse, sheetname='1.1 Shares', header=7)
-    df_etfs = pd.read_excel(lse, sheetname='1.3 ETFs', header=7)
+    df_shares = pd.read_excel(lse, sheet_name='1.1 Shares', header=7)
+    df_etfs = pd.read_excel(lse, sheet_name='1.3 ETFs', header=7)
     df_uk = pd.concat([df_shares, df_etfs])
 
     df_uk.rename(columns={'TIDM': 'Symbol',
@@ -287,23 +287,26 @@ def temp_1():
 
 
 def temp_2():
-    df = pd.read_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], Cp.ticker_benchmark.replace(':', '_')), index_col=0)
-    print(df.tail(3))
-    df = df.append(pd.DataFrame(df[-1:].values, index=['2019-04-24'], columns=df.columns))
-    print(df.tail(3))
-
+    yahoo_ticker = 'MSFT'
+    df = pdr.data.get_data_yahoo(yahoo_ticker)
+    df = df.drop(['Open', 'High', 'Low', 'Close', 'Volume'], axis=1)
+    df = df[df['Adj Close'].astype(str) != 'null']
+    df['Adj Close'] = df['Adj Close'].astype(float)
+    #df.rename(columns={'Adj Close': 'Close_' + yahoo_ticker}, inplace=True)
+    df.to_csv('z_{}.csv'.format(yahoo_ticker))
+    print('Done: {}'.format(yahoo_ticker))
 
 
 if __name__ == "__main__":
     print('Start: ', datetime.today())
-    # production()
+    production()
     # temp_test()
     # static_data()
     # download_yahoo_eod_data()
     # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='^GSPC', filename=Cp.ticker_benchmark, close_column_name=Cp.ticker_benchmark)
     # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='VUKE.L', filename='LON_VUKE', close_column_name='LON:VUKE')
-    # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='SPY', filename='NYSE_SPY', close_column_name='NYSE:SPY')
+    # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='MSFT', filename='NYSE_MSFT', close_column_name='NASDAQ:MSFT')
     # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='XLF', filename='NYSE_XLF', close_column_name='NYSE:XLF')
-    temp_2()
+    # temp_2()
 
     print('Finished: ', datetime.today())

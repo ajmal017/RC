@@ -4,7 +4,10 @@ import matplotlib.pyplot as plt
 import ConfigParameters as Cp
 import xlsxwriter as xls
 import Data as Data
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
 import seaborn as sns
+sns.set()
 
 
 def equity_curve(backtest_file=None, df=None):

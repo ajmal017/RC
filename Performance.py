@@ -106,7 +106,6 @@ def calc_stats(df, y_column, x_column):
     X = sm.add_constant(df[x_column])
     y = df[y_column]
     model = sm.OLS(endog=y, exog=X, missing='drop', hasconst=True).fit()
-
     beta = model.params[1]
     alpha = model.params['const']
     r2 = model.rsquared

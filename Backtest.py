@@ -95,7 +95,7 @@ def manage_orders_for_long_only(portfolio, bar, ticker_group):
     # Case 1: Not enough open positions for tickers in group
     if len(open_positions.keys()) < max_tickers and isinstance(long_ticker, str) and isinstance(short_ticker, str):
 
-        if long_ticker != '' and long_ticker not in current_open_positions:
+        if long_ticker != '' and long_ticker not in current_open_positions and bar['Close_CBOE:VIX'] < 20.0:
             enter_long_position(portfolio, bar, long_ticker)
 
     # Case 2: If there are more than the maximum #tickers with open positions, then close all positions in ticker group
