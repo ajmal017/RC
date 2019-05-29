@@ -11,7 +11,7 @@ def create_long_short_tickers(tickers, df, ticker_group, signal_lag):
 
 
 def rsi(tickers, df, ticker_group, signal_lag):
-    print('1')
+
     # Add Relative strength values
     for ticker in [Cp.ticker_benchmark] + tickers:
         df['score_' + ticker] = 0.0
@@ -29,25 +29,22 @@ def rsi(tickers, df, ticker_group, signal_lag):
         rsi = 100 - 100 / (1 + rUp / rDown)
 
         df = df.join(rsi.to_frame('RSI_{}'.format(ticker)))
-        # df['score_' + ticker] = np.where((df['RSI_{}'.format(ticker)] > 30.0) & (df['RSI_{}'.format(ticker)] < 70.0), 0.0, df['RSI_{}'.format(ticker)])
-        df['score_' + ticker] = df['RSI_{}'.format(ticker)]
+        df['score_' + ticker] = df['RSI_{}'.format(ticker)] * (-1.0)  # short if above 70, so shorts get lower score i.e. -70
+        # df['score_' + ticker] = np.where((df['RSI_{}'.format(ticker) > 30.0]) & (df['RSI_{}'.format(ticker) < 70.0]), 0.0, df['RSI_{}'.format(ticker)] * (-1.0))
 
-        # df['score_' + ticker] = df['score_' + ticker] * (-1.0)  # short if above 70, so shorts get lower score i.e. -70
+    # Go long highest, and short the 2nd lowest score
+    df = rank_ticker_scores(tickers, df, ticker_group, 1, len(tickers)-1)
 
-        # Go long 2nd highest, and short the 2nd lowest score
-        df = rank_ticker_scores(tickers, df, ticker_group, 1, len(tickers)-1)
+    # Add lag to signal
+    df[ticker_group + '_long_ticker'] = df[ticker_group + '_long_ticker'].shift(signal_lag, axis=0)
+    df[ticker_group + '_short_ticker'] = df[ticker_group + '_short_ticker'].shift(signal_lag, axis=0)
+    df[ticker_group + '_score'].shift(signal_lag)
 
-        # Add lag to signal
-        df[ticker_group + '_long_ticker'] = df[ticker_group + '_long_ticker'].shift(signal_lag, axis=0)
-        df[ticker_group + '_short_ticker'] = df[ticker_group + '_short_ticker'].shift(signal_lag, axis=0)
-        df[ticker_group + '_score'].shift(signal_lag)
+    df[ticker_group + '_long_ticker'] = df[ticker_group + '_long_ticker'].replace(np.nan, '', regex=True)
+    df[ticker_group + '_short_ticker'] = df[ticker_group + '_short_ticker'].replace(np.nan, '', regex=True)
+    df['score_' + ticker] = df['score_' + ticker].replace(np.nan, 0.0, regex=True)
 
-        df[ticker_group + '_long_ticker'] = df[ticker_group + '_long_ticker'].replace(np.nan, '', regex=True)
-        df[ticker_group + '_short_ticker'] = df[ticker_group + '_short_ticker'].replace(np.nan, '', regex=True)
-        df['score_' + ticker] = df['score_' + ticker].replace(np.nan, 0.0, regex=True)
-        print(df.tail)
-        df.to_csv('z.csv')
-        return df
+    return df
 
 
 def momentum_relative_strength(tickers, df, ticker_group, signal_lag):
@@ -105,14 +102,7 @@ def momentum_relative_strength(tickers, df, ticker_group, signal_lag):
 
 
 def rank_ticker_scores(tickers, df, ticker_group, long_rank, short_rank):
-    """
-    :param tickers:
-    :param df:
-    :param ticker_group:
-    :param long_rank:
-    :param short_rank:
-    :return: df
-    """
+
     list_of_score_columns = ['score_' + s for s in tickers]
 
     # Identify score columns with highest and 2nd highest value for each row

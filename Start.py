@@ -13,10 +13,11 @@ def run_simulation(simulation_name, universe_of_tickers_df, column_to_group_by='
                    generate_outputs=False, run_backtest=True):
     # Get the Universe of tickers as a single DataFrame
     universe_of_tickers = universe_of_tickers_df.index.tolist()
+    universe_of_tickers = ['NASDAQ:AAPL', 'NASDAQ:GOOG', 'NASDAQ:MSFT', 'NASDAQ:AMZN', 'NASDAQ:AMAT', 'NASDAQ:INTC']
 
     # Only keep tickers that enough data
     tickers = Data.get_tickers_with_good_data(universe_of_tickers)
-    tickers = tickers[:5]
+    print(tickers)
     tickers_df = universe_of_tickers_df[universe_of_tickers_df.index.isin(tickers)]
 
     df = Data.create_df_from_tickers(tickers)

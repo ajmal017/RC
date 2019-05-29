@@ -104,7 +104,7 @@ macro = [
 
 
 lookback = 60
-deal_signal_lag = 1 # number of days to wait after signal before executing trade
+deal_signal_lag = 0 # number of days to wait after signal before executing trade
 pairs_trading = False
 
 ewma = {'fast': 50, 'slow': 200}
