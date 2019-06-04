@@ -104,8 +104,8 @@ macro = [
 
 
 lookback = 60
-deal_signal_lag = 0 # number of days to wait after signal before executing trade
-pairs_trading = False
+deal_signal_lag = 2 # number of days to wait after signal before executing trade
+position_model = 'long_or_short'    # pairs_long_and_short, long_or_short
 
 ewma = {'fast': 50, 'slow': 200}
 BollBandFactor = 2.0

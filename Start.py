@@ -1,7 +1,7 @@
 import datetime
-import ConfigParameters as Cp
+import ConfigParameters as cp
 import Data as Data
-import Strategy as Strategy
+import Strategy_RSI as Strategy
 from Portfolio import Portfolio as Portfolio
 import Performance as Performance
 import Graphs as Graphs
@@ -17,7 +17,6 @@ def run_simulation(simulation_name, universe_of_tickers_df, column_to_group_by='
 
     # Only keep tickers that enough data
     tickers = Data.get_tickers_with_good_data(universe_of_tickers)
-    print(tickers)
     tickers_df = universe_of_tickers_df[universe_of_tickers_df.index.isin(tickers)]
 
     df = Data.create_df_from_tickers(tickers)
@@ -32,7 +31,7 @@ def run_simulation(simulation_name, universe_of_tickers_df, column_to_group_by='
 
             # At least 2 tickers are required for a long-short strategy
             if len(tickers) > 4:
-                df = Strategy.create_long_short_tickers(tickers, df, ticker_group, signal_lag=1)
+                df = Strategy.create_long_short_tickers(tickers, df, ticker_group)
                 print('Done: {}'.format(ticker_group))
             else:
                 print('Not enough tickers for: ' + ticker_group)
@@ -47,12 +46,12 @@ def run_simulation(simulation_name, universe_of_tickers_df, column_to_group_by='
 
         # Outputs
         if generate_outputs:
-            portfolio.orders_df.to_csv(Cp.files['orders'])
-            portfolio.trades_df.to_csv(Cp.files['trades'])
+            portfolio.orders_df.to_csv(cp.files['orders'])
+            portfolio.trades_df.to_csv(cp.files['trades'])
             if len(ticker_groups) == 1:
-                portfolio.df.to_csv(Cp.files['backtest'])
+                portfolio.df.to_csv(cp.files['backtest'])
 
-            portfolio.metrics_df.to_csv(Cp.files['metrics'])
+            portfolio.metrics_df.to_csv(cp.files['metrics'])
             print(portfolio.metrics_df)
             Graphs.equity_curve(df=portfolio.df)
 
@@ -72,7 +71,7 @@ def run_simulation(simulation_name, universe_of_tickers_df, column_to_group_by='
 
         df = df_long_tickers.join(df_short_tickers)
         print(df)
-        df.to_csv(Cp.files['latest_signals'])
+        df.to_csv(cp.files['latest_signals'])
 
 
 def run_simulations_for_each_exchange_sector():
@@ -91,7 +90,7 @@ def run_simulations_for_each_exchange_sector():
     # All metrics
     df_metrics = pd.DataFrame(metrics_for_all_ticker_groups)
     print(df_metrics.T)
-    df_metrics.T.to_csv(Cp.files['metrics'])
+    df_metrics.T.to_csv(cp.files['metrics'])
 
 
 def case_sims():
@@ -121,11 +120,12 @@ if __name__ == "__main__":
 
 
 """
-Strategy Implementation:
-RS: 1w, 1m and 3m
-Entry: long: 3rd highest RSI. The reason for not choosing 1st or 2nd highest RSI is that they are already overbought
-Exit1: Loss on current position > £500
-Exit2: current long_ticker = short_ticker signal
-Exit3: Trailing Stop hit. TP raised for every £500 of profit
-
+To Do:
+1. Enable shorting of high RSI (status: checking!)
+2. Investigate drawdown numbers as positive numbers show on chart
+3. Generate signals and trading Google-Sheets. Use latest_signals to generate a watchlist
+4. Use Astrology
+5. Create ETF group
+6. RSI screener
+7. Sort out LON data and bad tickers
 """

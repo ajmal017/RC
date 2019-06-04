@@ -6,9 +6,6 @@ import pandas as pd
 def run(df, portfolio):
     """
     Creates orders from signals and Money & Risk Management
-    :param df:
-    :param portfolio:
-    :return:
     """
     ticker_groups = portfolio.ticker_group.keys()
     df['Cash'] = 0.0
@@ -23,10 +20,12 @@ def run(df, portfolio):
 
             # Create, update and cancel orders
             for ticker_group in ticker_groups:
-                if Cp.pairs_trading is True:
+                if Cp.position_model == 'pairs_long_and_short':
                     manage_orders_for_pairs_positions(portfolio, curr_row, ticker_group)
-                else:
+                elif Cp.position_model == 'long_only':
                     manage_orders_for_long_only(portfolio, curr_row, ticker_group)
+                elif Cp.position_model == 'long_or_short':
+                    manage_orders_for_long_or_short(portfolio, curr_row, ticker_group)
 
             # Fill open market orders
             execute_orders(portfolio, curr_row)
@@ -95,7 +94,7 @@ def manage_orders_for_long_only(portfolio, bar, ticker_group):
     # Case 1: Not enough open positions for tickers in group
     if len(open_positions.keys()) < max_tickers and isinstance(long_ticker, str) and isinstance(short_ticker, str):
 
-        if long_ticker != '' and long_ticker not in current_open_positions and bar['Close_CBOE:VIX'] < 20.0:
+        if long_ticker != '' and long_ticker not in current_open_positions: # and bar['Close_CBOE:VIX'] < 20.0:
             enter_long_position(portfolio, bar, long_ticker)
 
     # Case 2: If there are more than the maximum #tickers with open positions, then close all positions in ticker group
@@ -107,6 +106,37 @@ def manage_orders_for_long_only(portfolio, bar, ticker_group):
     for open_ticker in current_open_positions:
         manage_stop_orders(portfolio, bar, open_ticker)
 
+
+def manage_orders_for_long_or_short(portfolio, bar, ticker_group):
+    # Get the tickers within the ticker group
+    tickers = portfolio.ticker_group[ticker_group]
+    max_tickers = Cp.maximum_number_of_open_tickers_per_ticker_group   # 2
+
+    # Determine number of open positions for ticker_group
+    open_positions = dict((key, value) for key, value in portfolio.position.items() if key in tickers and value != 0)
+    current_open_positions = list(open_positions)
+
+    # Current signals
+    long_ticker = bar[ticker_group + '_long_ticker']
+    short_ticker = bar[ticker_group + '_short_ticker']
+
+    # Case 1: Not enough open positions for tickers in group
+    if len(open_positions.keys()) < max_tickers and isinstance(long_ticker, str) and isinstance(short_ticker, str):
+
+        if long_ticker != '' and long_ticker not in current_open_positions: # and bar['Close_CBOE:VIX'] < 20.0:
+            enter_long_position(portfolio, bar, long_ticker)
+
+        if short_ticker != '' and short_ticker not in current_open_positions: # and bar['Close_CBOE:VIX'] < 20.0:
+            enter_short_position(portfolio, bar, short_ticker)
+
+    # Case 2: If there are more than the maximum #tickers with open positions, then close all positions in ticker group
+    elif len(current_open_positions) > max_tickers:
+        for open_ticker in current_open_positions:
+            exit_position(portfolio, bar, open_ticker)
+
+    # Manage stop orders for current_open_positions
+    for open_ticker in current_open_positions:
+        manage_stop_orders(portfolio, bar, open_ticker)
 
 def manage_orders_for_pairs_positions(portfolio, bar, ticker_group):
     """Manage orders for the day, by creating new orders or cancelling existing orders"""
@@ -166,6 +196,50 @@ def enter_long_position(portfolio, bar, ticker):
         position = max(abs(Cp.min_position), min(abs(Cp.max_position), abs(Cp.AmountToRiskPerTrade / sd)))
     except:
         position = 10000.0
+
+    # Determine quantity of assets
+    qty = int(position / (bar['EntryPrice_' + ticker] * fx_l))
+
+    # Determine stop prices
+    stop_price = (1 / fx_l) * (position - Cp.AmountToRiskPerTrade) / qty
+
+    deal_date = bar['DealDate']
+    deal_price = bar['EntryPrice_' + ticker]
+    ccy = get_ccy(ticker)
+    fx = get_fx(bar, ticker)
+
+    # Add a Market Order
+    market_order = Order(open_date=deal_date, ticker=ticker, quantity=qty, order_type='MKT', price=deal_price,
+                         ccy=ccy, fx=fx)
+
+    portfolio.trade_id[ticker] += 1
+    market_order.trade_id = portfolio.trade_id[ticker]
+    portfolio.orders.append(market_order)
+
+    # Risk Management: Add an associated Stop Order
+    stop_order = Order(open_date=deal_date, ticker=ticker, quantity=-qty, order_type='STP', ccy=ccy, fx=fx)
+    stop_order.price = stop_price
+    stop_order.trade_id = market_order.trade_id
+    portfolio.orders.append(stop_order)
+
+    # Hedge FX risk
+    manage_fx_hedge(portfolio, bar, market_order)
+
+
+def enter_short_position(portfolio, bar, ticker):
+    # Money & Risk Management: Use StdDev
+    sd = bar['Std_Dev_pct_' + ticker]
+    sd = 1.0 if sd == 0.0 else sd == bar['Std_Dev_pct_' + ticker]
+
+    fx_l = get_fx(bar, ticker)  # fx rate for ticker
+
+    # position s/b between min_position and max_position e.g. between GBP3000 and GBP10000
+    try:
+        position = max(abs(Cp.min_position), min(abs(Cp.max_position), abs(Cp.AmountToRiskPerTrade / sd)))
+    except:
+        position = 10000.0
+
+    position = (-1.0) * position
 
     # Determine quantity of assets
     qty = int(position / (bar['EntryPrice_' + ticker] * fx_l))
