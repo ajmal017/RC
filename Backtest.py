@@ -138,6 +138,7 @@ def manage_orders_for_long_or_short(portfolio, bar, ticker_group):
     for open_ticker in current_open_positions:
         manage_stop_orders(portfolio, bar, open_ticker)
 
+
 def manage_orders_for_pairs_positions(portfolio, bar, ticker_group):
     """Manage orders for the day, by creating new orders or cancelling existing orders"""
 
@@ -187,7 +188,8 @@ def manage_orders_for_pairs_positions(portfolio, bar, ticker_group):
 def enter_long_position(portfolio, bar, ticker):
     # Money & Risk Management: Use the higher StdDev from the pair of stocks
     sd = bar['Std_Dev_pct_' + ticker]
-    sd = 1.0 if sd == 0.0 else sd == bar['Std_Dev_pct_' + ticker]
+    if sd == 0.0:
+        sd = 1.0
 
     fx_l = get_fx(bar, ticker)  # fx rate for long ticker
 
@@ -229,7 +231,8 @@ def enter_long_position(portfolio, bar, ticker):
 def enter_short_position(portfolio, bar, ticker):
     # Money & Risk Management: Use StdDev
     sd = bar['Std_Dev_pct_' + ticker]
-    sd = 1.0 if sd == 0.0 else sd == bar['Std_Dev_pct_' + ticker]
+    if sd == 0.0:
+        sd = 1.0
 
     fx_l = get_fx(bar, ticker)  # fx rate for ticker
 
@@ -277,7 +280,8 @@ def enter_pair_position(portfolio, bar, long_ticker, short_ticker):
     long_sd = bar['Std_Dev_pct_' + long_ticker]
     short_sd = bar['Std_Dev_pct_' + short_ticker]
     sd = short_sd if long_sd > short_sd else short_sd
-    sd = 1.0 if sd == 0.0 else sd == sd
+    if sd == 0.0:
+        sd = 1.0
 
     fx_l = get_fx(bar, long_ticker)  # fx rate for long ticker
     fx_s = get_fx(bar, short_ticker)  # fx rate for short ticker
@@ -454,7 +458,7 @@ def get_ccy(ticker):
         ccy = 'GBX'
     elif '-GBP' in ticker:
         ccy = 'GBP'
-    elif 'NYQ:' in ticker or 'NSQ:' in ticker:
+    elif 'NYSE:' in ticker or 'NASDAQ:' in ticker:
         ccy = 'USD'
     return ccy
 
@@ -466,6 +470,6 @@ def get_fx(bar, ticker):
         CCYGBP = bar['Close_GBX-GBP']
     elif '-GBP' in ticker:
         CCYGBP = 1.0
-    elif 'NYQ:' in ticker or 'NSQ:' in ticker:
+    elif 'NYSE:' in ticker or 'NASDAQ:' in ticker:
         CCYGBP = bar['Close_USD-GBP']
     return CCYGBP

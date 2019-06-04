@@ -104,7 +104,7 @@ macro = [
 
 
 lookback = 60
-deal_signal_lag = 2 # number of days to wait after signal before executing trade
+deal_signal_lag = 1 # number of days to wait after signal before executing trade
 position_model = 'long_or_short'    # pairs_long_and_short, long_or_short
 
 ewma = {'fast': 50, 'slow': 200}
@@ -117,6 +117,7 @@ RelativeStrengthPeriods = [5, 20, 60] # 1w (5), 1m (20), 3m (60), 6m (125), 12m 
 
 hedge_fx = False
 
+# All GBP
 initial_cash = 10000.0
 AmountToRiskPerTrade = 500.0
 min_pl = 500.0

@@ -13,7 +13,7 @@ def run_simulation(simulation_name, universe_of_tickers_df, column_to_group_by='
                    generate_outputs=False, run_backtest=True):
     # Get the Universe of tickers as a single DataFrame
     universe_of_tickers = universe_of_tickers_df.index.tolist()
-    universe_of_tickers = ['NASDAQ:AAPL', 'NASDAQ:GOOG', 'NASDAQ:MSFT', 'NASDAQ:AMZN', 'NASDAQ:AMAT', 'NASDAQ:INTC']
+    # universe_of_tickers = ['NASDAQ:AAPL', 'NASDAQ:GOOG', 'NASDAQ:MSFT', 'NASDAQ:AMZN', 'NASDAQ:AMAT', 'NASDAQ:INTC']
 
     # Only keep tickers that enough data
     tickers = Data.get_tickers_with_good_data(universe_of_tickers)
@@ -99,11 +99,11 @@ def case_sims():
     # run_simulation(simulation_name='All', universe_of_tickers_df=df, generate_outputs=True)
 
     # Case 2: Run 1 simulation for a specific industry_group or sector (metrics, backtest + orders/trades
-    df = df[df['Exchange_Sector'] == 'NASDAQ_Technology']
-    run_simulation(simulation_name='Single', universe_of_tickers_df=df, generate_outputs=True)
+    #df = df[df['Exchange_Sector'] == 'NASDAQ_Technology']
+    #run_simulation(simulation_name='Single', universe_of_tickers_df=df, generate_outputs=True)
 
     # Case 3: Run a simulation to compare the performance metrics for each Exchange_Sector (metrics only)
-    # run_simulations_for_each_exchange_sector()
+    run_simulations_for_each_exchange_sector()
 
 
 def production():
@@ -121,11 +121,13 @@ if __name__ == "__main__":
 
 """
 To Do:
-1. Enable shorting of high RSI (status: checking!)
+1. Check trades and orders
 2. Investigate drawdown numbers as positive numbers show on chart
 3. Generate signals and trading Google-Sheets. Use latest_signals to generate a watchlist
 4. Use Astrology
 5. Create ETF group
 6. RSI screener
 7. Sort out LON data and bad tickers
+8. Add Data Cleansing routines
+
 """

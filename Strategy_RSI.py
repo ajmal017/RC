@@ -25,8 +25,8 @@ def create_long_short_tickers(tickers, df, ticker_group):
         df = df.join(rsi.to_frame('RSI_{}'.format(ticker)))
 
     # Go long highest, and short the 2nd lowest score
-    df[ticker_group + '_long_ticker'] = df.apply(low_rsi, axis=1, args=(tickers,))
-    df[ticker_group + '_short_ticker'] = df.apply(high_rsi, axis=1, args=(tickers,))
+    df[ticker_group + '_long_ticker'] = df.apply(high_rsi, axis=1, args=(tickers,))
+    df[ticker_group + '_short_ticker'] = df.apply(low_rsi, axis=1, args=(tickers,))
 
     # Add lag to signal
     df[ticker_group + '_long_ticker'] = df[ticker_group + '_long_ticker'].shift(cp.deal_signal_lag, axis=0)
