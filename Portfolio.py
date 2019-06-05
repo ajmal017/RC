@@ -31,7 +31,7 @@ class Portfolio:
             tickers_in_group = list(set(df[tg + '_long_ticker'].tolist() + df[tg + '_short_ticker'].tolist()))
             self.ticker_group[tg] = tickers_in_group
             for ticker in tickers_in_group:
-                if ticker != '' and str(ticker) != 'nan':
+                if ticker != '' and isinstance(ticker, str):
                     self.tickers.append(ticker)
 
         # Add USD-GBP if FX hedge
