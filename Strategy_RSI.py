@@ -8,8 +8,8 @@ def create_long_short_tickers(tickers, df, ticker_group):
     Exit3: Trailing Stop hit. TP raised for every £500 of profit
     """
     # Add RSI values
-    for ticker in [cp.ticker_benchmark] + tickers:
-
+    for ticker in tickers:  # [cp.ticker_benchmark] +
+        # print(ticker)
         # Calculate the RSI
         delta = df['Close_{}'.format(ticker)].diff()
         up, down = delta.copy(), delta.copy()
@@ -24,9 +24,13 @@ def create_long_short_tickers(tickers, df, ticker_group):
 
         df = df.join(rsi.to_frame('RSI_{}'.format(ticker)))
 
-    # Go long highest, and short the 2nd lowest score
-    df[ticker_group + '_long_ticker'] = df.apply(high_rsi, axis=1, args=(tickers,))
-    df[ticker_group + '_short_ticker'] = df.apply(low_rsi, axis=1, args=(tickers,))
+    # Go Long/Short depending on the ticker_group (exchange-sector)
+    if ticker_group in ['NASDAQ_Transportation', 'NASDAQ_Capital Goods', 'NYSE_Finance']:
+        df[ticker_group + '_long_ticker'] = df.apply(low_rsi, axis=1, args=(tickers,))
+        df[ticker_group + '_short_ticker'] = df.apply(high_rsi, axis=1, args=(tickers,))
+    else:
+        df[ticker_group + '_long_ticker'] = df.apply(high_rsi, axis=1, args=(tickers,))
+        df[ticker_group + '_short_ticker'] = df.apply(low_rsi, axis=1, args=(tickers,))
 
     # Add lag to signal
     df[ticker_group + '_long_ticker'] = df[ticker_group + '_long_ticker'].shift(cp.deal_signal_lag, axis=0)
