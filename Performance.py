@@ -103,10 +103,6 @@ def metrics(portfolio, simulation_name):
 def calc_stats(df, y_column, x_column):
     df = df.tail(-(Cp.lookback * 4))    # remove the first 180 days
     df = df.head(-1)                    # remove last line
-
-    y_column = 'Close_NASDAQ:AMAT'
-    x_column = 'Close_NASDAQ:MSFT'
-
     X = sm.add_constant(df[x_column].tolist(), prepend=False)
     y = df[y_column].tolist()
     mod = sm.OLS(endog=y, exog=X, missing='drop', hasconst=True)
