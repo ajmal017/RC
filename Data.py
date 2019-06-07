@@ -1,11 +1,11 @@
 import os
 import time
 import pandas as pd
-import pandas_datareader as pdr
+#import pandas_datareader as pdr
 import ConfigParameters as Cp
 from datetime import datetime
 from pandas.tseries.offsets import BDay
-import quandl
+#import quandl
 
 
 def create_df_from_tickers(tickers, start_date=None, end_date=None):
@@ -85,10 +85,11 @@ def get_tickers_with_good_data(tickers):
         try:
             df = pd.read_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], ticker.replace(':', '_')))
             df = df.sort_index()
+
             if len(df.index) < 300:
                 if Cp.logging:
                     print('Less than 300 rows: {} ({})'.format(ticker, len(df.index)))
-            elif not do_dataframes_have_same_last_n_days_of_histories(df, dfb, 3):
+            elif not do_dataframes_have_same_last_n_days_of_histories(df, dfb, 2):
                 if Cp.logging:
                     print('Stale ticker: {} ({})'.format(ticker, df.index[-1]))
             else:
@@ -104,7 +105,8 @@ def get_tickers_with_good_data(tickers):
 def do_dataframes_have_same_last_n_days_of_histories(df1, df2, number_of_days=1):
     res = True
     for n in range(number_of_days):
-        if df1.index[-n] != df2.index[-n]:
+        # if df1.index[-n] != df2.index[-n]:
+        if df1['Date'].tolist()[n] != df2['Date'].tolist()[n]:
             if Cp.logging:
                 print('{} vs {}'.format(df1.index[-n], df2.index[-n]))
             res = False
