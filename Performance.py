@@ -3,7 +3,7 @@ import collections
 import pandas as pd
 import ConfigParameters as Cp
 import statsmodels.api as sm
-np.seterr(invalid='ignore')     # removes RuntimeWarning: invalid value encountered in greater return sum(S > tol)
+# np.seterr(invalid='ignore')     # removes RuntimeWarning: invalid value encountered in greater return sum(S > tol)
 
 
 def metrics(portfolio, simulation_name):
@@ -79,14 +79,12 @@ def metrics(portfolio, simulation_name):
     pm['longest_drawdown_duration_days'] = "{:,.0f}".format(dfb['DrawdownDuration'].max())
 
     # sharpe ratio: aim for SR > 1
-    sharpe_ratio = np.sqrt(252) * (dfb['equity_daily_returns'].mean() -
-                                   (risk_free_rate / 252)) / dfb['equity_daily_returns'].std()
+    sharpe_ratio = np.sqrt(252) * (dfb['equity_daily_returns'].mean() - (risk_free_rate / 252)) / dfb['equity_daily_returns'].std()
     pm['Sharpe_ratio'] = "{0:.2f}".format(sharpe_ratio)
 
     # Beta and Correlation to FTSE100
-    beta, alpha, rsquared = calc_stats(dfb, 'equity_daily_returns', 'Change_pct_' + Cp.ticker_benchmark)
+    beta, rsquared = calc_stats(dfb, 'equity_daily_returns', 'Change_pct_' + Cp.ticker_benchmark)
     pm['beta_to_benchmark'] = beta
-    pm['alpha_to_benchmark'] = alpha
     pm['rsquared_to_benchmark'] = rsquared
 
     pm['Correlation_to_benchmark'] = dfb['equity_daily_returns'].corr(dfb['Change_pct_' + Cp.ticker_benchmark])
@@ -103,10 +101,16 @@ def metrics(portfolio, simulation_name):
 
 
 def calc_stats(df, y_column, x_column):
-    X = sm.add_constant(df[x_column])
-    y = df[y_column]
-    model = sm.OLS(endog=y, exog=X, missing='drop', hasconst=True).fit()
-    beta = model.params[1]
-    alpha = model.params['const']
-    r2 = model.rsquared
-    return beta, alpha, r2
+    df = df.tail(-(Cp.lookback * 4))    # remove the first 180 days
+    df = df.head(-1)                    # remove last line
+
+    y_column = 'Close_NASDAQ:AMAT'
+    x_column = 'Close_NASDAQ:MSFT'
+
+    X = sm.add_constant(df[x_column].tolist(), prepend=False)
+    y = df[y_column].tolist()
+    mod = sm.OLS(endog=y, exog=X, missing='drop', hasconst=True)
+    res = mod.fit()
+    beta = res.params[1]
+    r2 = res.rsquared
+    return beta, r2
