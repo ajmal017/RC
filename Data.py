@@ -1,11 +1,11 @@
 import os
 import time
 import pandas as pd
-#import pandas_datareader as pdr
+import pandas_datareader as pdr
 import ConfigParameters as Cp
 from datetime import datetime
 from pandas.tseries.offsets import BDay
-#import quandl
+import quandl
 
 
 def create_df_from_tickers(tickers, start_date=None, end_date=None):
