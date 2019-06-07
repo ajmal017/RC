@@ -2,10 +2,13 @@ import pandas as pd
 import Data as Data
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
 import ConfigParameters as Cp
 import Performance as Pf
 import PairFinder as Pa
 import seaborn as sn
+sn.set()
 
 
 def analyse(ticker1, ticker2):
@@ -89,9 +92,9 @@ def rolling_stats(df, y_column, x_column, window=20):
 
 
 if __name__ == "__main__":
-    # ticker_pair = 'NASDAQ:FB_NASDAQ:MCHP'
+    ticker_pair = 'NASDAQ:FB_NASDAQ:MSFT'
     # ticker_pair = 'NYSE:TD_NYSE:BLK'
-    ticker_pair = 'LON:IGUS_LON:VUSA'
+    # ticker_pair = 'LON:IGUS_LON:VUSA'
     # ticker_pair = 'NASDAQ:AABA_NYSE:VMW'
     # ticker_pair = 'LON:ISF_LON:MIDD'
     tickers = ticker_pair.split('_')
