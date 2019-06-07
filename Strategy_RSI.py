@@ -2,11 +2,6 @@ import ConfigParameters as cp
 
 
 def create_long_short_tickers(tickers, df, ticker_group):
-    """
-    Exit1: Loss on current position > £500
-    Exit2: current long_ticker = short_ticker signal
-    Exit3: Trailing Stop hit. TP raised for every £500 of profit
-    """
     # Add RSI values
     for ticker in tickers:  # [cp.ticker_benchmark] +
         # print(ticker)
@@ -25,7 +20,7 @@ def create_long_short_tickers(tickers, df, ticker_group):
         df = df.join(rsi.to_frame('RSI_{}'.format(ticker)))
 
     # Go Long/Short depending on the ticker_group (exchange-sector)
-    if ticker_group in ['NASDAQ_Transportation', 'NASDAQ_Capital Goods', 'NYSE_Finance']:
+    if ticker_group in ['NASDAQ_Transportation', 'NASDAQ_Capital Goods', 'NYSE_Finance', 'LON_Oil & Gas', 'LON_Utilities']:
         df[ticker_group + '_long_ticker'] = df.apply(low_rsi, axis=1, args=(tickers,))
         df[ticker_group + '_short_ticker'] = df.apply(high_rsi, axis=1, args=(tickers,))
     else:
@@ -71,4 +66,3 @@ def high_rsi(x, tickers):
         ticker_with_highest_rsi = ''
 
     return ticker_with_highest_rsi
-
