@@ -14,7 +14,7 @@ def run_simulation(simulation_name, universe_of_tickers_df, column_to_group_by='
     # Get the Universe of tickers as a single DataFrame
     universe_of_tickers = universe_of_tickers_df.index.tolist()
     #universe_of_tickers = ['NASDAQ:AAPL', 'NASDAQ:GOOG', 'NASDAQ:MSFT', 'NASDAQ:AMZN', 'NASDAQ:AMAT', 'NASDAQ:INTC']
-
+    universe_of_tickers = ['LON:CBG', 'LON:BARC', 'LON:HSBA', 'LON:LLOY', 'LON:RSA', 'LON:LGEN']
     # Only keep tickers that enough data
     tickers = Data.get_tickers_with_good_data(universe_of_tickers)
     tickers_df = universe_of_tickers_df[universe_of_tickers_df.index.isin(tickers)]
@@ -99,10 +99,11 @@ def case_sims():
     # run_simulation(simulation_name='All', universe_of_tickers_df=df, generate_outputs=True)
 
     # Case 2: Run 1 simulation for a specific industry_group or sector (metrics, backtest + orders/trades
-    #df = df[df['Exchange_Sector'] == 'NASDAQ_Technology']
-    #df = df[df['Exchange_Sector'] == 'NYSE_Finance']
-    df = df[df['Exchange_Sector'].isin(['NASDAQ_Technology', 'NYSE_Finance'])]
-    #run_simulation(simulation_name='Single', universe_of_tickers_df=df, generate_outputs=True)
+    # df = df[df['Exchange_Sector'] == 'NASDAQ_Technology']
+    df = df[df['Exchange_Sector'] == 'LON_Financials']
+    #df = df[df['Exchange_Sector'] == 'NYSE_Finance'] #
+    #df = df[df['Exchange_Sector'].isin(['NASDAQ_Technology', 'NYSE_Finance'])]
+    run_simulation(simulation_name='Single', universe_of_tickers_df=df, generate_outputs=True)
 
     # Case 3: Run a simulation to compare the performance metrics for each Exchange_Sector (metrics only)
     # run_simulations_for_each_exchange_sector()
@@ -116,8 +117,8 @@ def production():
 
 if __name__ == "__main__":
     print('Start: {}\n'.format(datetime.datetime.today()))
-    production()
-    #case_sims()
+    # production()
+    case_sims()
     print('\nFinished: {}'.format(datetime.datetime.today()))
 
 
