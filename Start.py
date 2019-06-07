@@ -14,7 +14,7 @@ def run_simulation(simulation_name, universe_of_tickers_df, column_to_group_by='
     # Get the Universe of tickers as a single DataFrame
     universe_of_tickers = universe_of_tickers_df.index.tolist()
     #universe_of_tickers = ['NASDAQ:AAPL', 'NASDAQ:GOOG', 'NASDAQ:MSFT', 'NASDAQ:AMZN', 'NASDAQ:AMAT', 'NASDAQ:INTC']
-    universe_of_tickers = ['LON:CBG', 'LON:BARC', 'LON:HSBA', 'LON:LLOY', 'LON:RSA', 'LON:LGEN']
+    # universe_of_tickers = ['LON:CBG', 'LON:BARC', 'LON:HSBA', 'LON:LLOY', 'LON:RSA', 'LON:LGEN']
     # Only keep tickers that enough data
     tickers = Data.get_tickers_with_good_data(universe_of_tickers)
     tickers_df = universe_of_tickers_df[universe_of_tickers_df.index.isin(tickers)]
@@ -100,13 +100,14 @@ def case_sims():
 
     # Case 2: Run 1 simulation for a specific industry_group or sector (metrics, backtest + orders/trades
     # df = df[df['Exchange_Sector'] == 'NASDAQ_Technology']
-    df = df[df['Exchange_Sector'] == 'LON_Financials']
+    # df = df[df['Exchange_Sector'] == 'LON_Financials']
     #df = df[df['Exchange_Sector'] == 'NYSE_Finance'] #
     #df = df[df['Exchange_Sector'].isin(['NASDAQ_Technology', 'NYSE_Finance'])]
-    run_simulation(simulation_name='Single', universe_of_tickers_df=df, generate_outputs=True)
+    # df = df[df['Exchange_Sector'].isin(['LON_Financials', 'LON_Consumer', 'LON_Industrials', 'LON_Basic Materials', 'LON_Consumer Goods', 'LON_Health Care', 'LON_Technology', 'LON_Oil & Gas'])]
+    # run_simulation(simulation_name='Single', universe_of_tickers_df=df, generate_outputs=True)
 
     # Case 3: Run a simulation to compare the performance metrics for each Exchange_Sector (metrics only)
-    # run_simulations_for_each_exchange_sector()
+    run_simulations_for_each_exchange_sector()
 
 
 def production():
@@ -136,5 +137,36 @@ To Do:
 8. Add Data Cleansing routines
 9. Reinstall anaconda to work from cmd line
 10. Why does this line in Performance.py throw warning: model = sm.OLS(endog=y, exog=X, missing='drop', hasconst=True).fit()
+
+No data file: LON:ALD
+No data file: LON:ESUR
+No data file: LON:JLT
+No data file: LON:JLIF
+No data file: LON:NXG
+No data file: LON:OML
+No data file: LON:VM.
+Done: LON_Financials
+No data file: LON:AIRC
+No data file: LON:BOK
+No data file: LON:LCL
+No data file: LON:SKY
+No data file: LON:UBM
+No data file: LON:ZPG
+Done: LON_Consumer Services
+No data file: LON:AA.
+No data file: LON:BWO
+No data file: LON:QQ.
+No data file: LON:WPG
+No data file: LON:ZHEH
+Done: LON_Industrials
+No data file: LON:SHP
+Done: LON_Health Care
+Done: LON_Technology
+No data file: LON:BLT
+No data file: LON:RRS
+No data file: LON:VED
+Done: LON_Basic Materials
+No data file: LON:GKN
+No data file: LON:SGP
 
 """
