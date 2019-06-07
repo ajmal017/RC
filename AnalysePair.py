@@ -79,20 +79,18 @@ def rolling_stats(df, y_column, x_column, window=20):
 
         if len(df) - i >= window:
             # break the df into smaller chunks
-            chunk = df.iloc[i:window+i,:]
+            chunk = df.iloc[i:window+i, :]
             # calc_stats is a function created from the code above,
             # refer to the Gist at the end of the article.
-            beta,alpha,r2 = Pf.calc_stats(chunk, y_column, x_column)
+            beta, r2 = Pf.calc_stats(chunk, y_column, x_column)
             res.set_value(chunk.tail(1).index[0],"beta",beta)
-            res.set_value(chunk.tail(1).index[0],"alpha",alpha)
             res.set_value(chunk.tail(1).index[0],"r2",r2)
-            # print "%s beta: %.4f \t alpha: %.4f" % (chunk.tail(1).index[0],b,a)
     res = res.dropna()
     return res
 
 
 if __name__ == "__main__":
-    ticker_pair = 'NASDAQ:FB_NASDAQ:MSFT'
+    ticker_pair = 'NASDAQ:AMAT_NASDAQ:MSFT'
     # ticker_pair = 'NYSE:TD_NYSE:BLK'
     # ticker_pair = 'LON:IGUS_LON:VUSA'
     # ticker_pair = 'NASDAQ:AABA_NYSE:VMW'
