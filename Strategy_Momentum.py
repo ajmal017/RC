@@ -31,7 +31,7 @@ def create_long_short_tickers(tickers, df, ticker_group, signal_lag):
         df['score_' + ticker] = 0.0
 
         # Calculate the RS for each lookback period and ticker combination
-        for lookback in Cp.RelativeStrengthPeriods:
+        for lookback in Cp.relative_strength_periods:
 
             # Calculate % change between price now and lookback date
             df['strategy_Change_pct_{}_{}_days'.format(ticker, lookback)] = \

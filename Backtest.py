@@ -138,6 +138,11 @@ def manage_orders_for_long_or_short(portfolio, bar, ticker_group):
     for open_ticker in current_open_positions:
         manage_stop_orders(portfolio, bar, open_ticker)
 
+    # Close any positions if GBP P&L has exceeded AmountToRiskPerTrade because of exchange rates
+    for open_ticker in current_open_positions:
+        if portfolio.pl[open_ticker] < -1.0 * abs(Cp.amount_to_risk_per_trade):
+            exit_position(portfolio, bar, open_ticker)
+
 
 def manage_orders_for_pairs_positions(portfolio, bar, ticker_group):
     """Manage orders for the day, by creating new orders or cancelling existing orders"""
@@ -195,7 +200,7 @@ def enter_long_position(portfolio, bar, ticker):
 
     # long_position s/b between min_position and max_position e.g. between GBP3000 and GBP10000
     try:
-        position = max(abs(Cp.min_position), min(abs(Cp.max_position), abs(Cp.AmountToRiskPerTrade / sd)))
+        position = max(abs(Cp.min_position), min(abs(Cp.max_position), abs(Cp.amount_to_risk_per_trade / sd)))
     except:
         position = 10000.0
 
@@ -203,7 +208,7 @@ def enter_long_position(portfolio, bar, ticker):
     qty = int(position / (bar['EntryPrice_' + ticker] * fx_l))
 
     # Determine stop prices
-    stop_price = (1 / fx_l) * (position - Cp.AmountToRiskPerTrade) / qty
+    stop_price = (1 / fx_l) * (position - Cp.amount_to_risk_per_trade) / qty
 
     deal_date = bar['DealDate']
     deal_price = bar['EntryPrice_' + ticker]
@@ -238,7 +243,7 @@ def enter_short_position(portfolio, bar, ticker):
 
     # position s/b between min_position and max_position e.g. between GBP3000 and GBP10000
     try:
-        position = max(abs(Cp.min_position), min(abs(Cp.max_position), abs(Cp.AmountToRiskPerTrade / sd)))
+        position = max(abs(Cp.min_position), min(abs(Cp.max_position), abs(Cp.amount_to_risk_per_trade / sd)))
     except:
         position = 10000.0
 
@@ -248,7 +253,7 @@ def enter_short_position(portfolio, bar, ticker):
     qty = int(position / (bar['EntryPrice_' + ticker] * fx_l))
 
     # Determine stop prices
-    stop_price = (1 / fx_l) * (position - Cp.AmountToRiskPerTrade) / qty
+    stop_price = (1 / fx_l) * (position - Cp.amount_to_risk_per_trade) / qty
 
     deal_date = bar['DealDate']
     deal_price = bar['EntryPrice_' + ticker]
@@ -288,7 +293,7 @@ def enter_pair_position(portfolio, bar, long_ticker, short_ticker):
 
     # long_position s/b between min_position and max_position e.g. between GBP3000 and GBP10000
     try:
-        long_position = max(abs(Cp.min_position), min(abs(Cp.max_position), abs(Cp.AmountToRiskPerTrade / sd)))
+        long_position = max(abs(Cp.min_position), min(abs(Cp.max_position), abs(Cp.amount_to_risk_per_trade / sd)))
     except:
         long_position = 10000.0
 
@@ -299,8 +304,8 @@ def enter_pair_position(portfolio, bar, long_ticker, short_ticker):
     short_qty = int(short_position / (bar['EntryPrice_' + short_ticker] * fx_s))
 
     # Determine stop prices
-    long_stp = (1 / fx_l) * (long_position - Cp.AmountToRiskPerTrade) / long_qty
-    short_stp = (1 / fx_s) * (short_position - Cp.AmountToRiskPerTrade) / short_qty
+    long_stp = (1 / fx_l) * (long_position - Cp.amount_to_risk_per_trade) / long_qty
+    short_stp = (1 / fx_s) * (short_position - Cp.amount_to_risk_per_trade) / short_qty
 
     qty = {long_ticker: long_qty, short_ticker: short_qty}
     stop_price = {long_ticker: long_stp, short_ticker: short_stp}

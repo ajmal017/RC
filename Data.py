@@ -99,7 +99,8 @@ def get_tickers_with_good_data(tickers):
         except:
             print('No data file: {}'.format(ticker))
 
-    return good_tickers
+    return list(set(good_tickers) - set(Cp.problem_tickers))   # list(set(temp1) - set(temp2))
+
 
 
 def do_dataframes_have_same_last_n_days_of_histories(df1, df2, number_of_days=1):

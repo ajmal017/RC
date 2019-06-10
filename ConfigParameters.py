@@ -97,8 +97,6 @@ macro = [
      'Sector': 'Macro', 'Industry Grp': 'Index', 'CCY': 'GBP', 'MarketCapBillions': 0.0,
      'YahooTicker': 'IGUS.L', 'GoogleTicker': 'LON:IGUS'}
 
-
-    # PHGP
          ]
 
 
@@ -108,42 +106,24 @@ deal_signal_lag = 1 # number of days to wait after signal before executing trade
 position_model = 'long_or_short'    # pairs_long_and_short, long_or_short
 
 ewma = {'fast': 50, 'slow': 200}
-BollBandFactor = 2.0
+bollinger_band_factor = 2.0
 
 rsi_period = 14
 
 maximum_number_of_open_tickers_per_ticker_group = 2
-RelativeStrengthPeriods = [5, 20, 60] # 1w (5), 1m (20), 3m (60), 6m (125), 12m (250)
+relative_strength_periods = [5, 20, 60] # 1w (5), 1m (20), 3m (60), 6m (125), 12m (250)
 
 hedge_fx = False
 
 # All GBP
 initial_cash = 10000.0
-AmountToRiskPerTrade = 500.0
+amount_to_risk_per_trade = 500.0
 min_pl = 500.0
 max_position = 11000.0
 min_position = 6000.0
 
 
-
+problem_tickers = ['NYSE:INVH', 'NYSE:COF']
 
 # lse = r'http://www.londonstockexchange.com/statistics/companies-and-issuers/instruments-defined-by-mifir-identifiers-list-on-lse.xlsx'
 
-"""
-Problem tickers:
-AV.A.L
-AV.B.L
-PRSM.L
-BRD.L
-BLU.L
-BLUR.L
-BME.L
-BMR.L
-BNN.L
-BP.A.L
-BP.B.L
-BA47.L
-
-
-
-"""

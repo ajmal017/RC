@@ -4,7 +4,6 @@ import ConfigParameters as cp
 def create_long_short_tickers(tickers, df, ticker_group):
     # Add RSI values
     for ticker in tickers:  # [cp.ticker_benchmark] +
-        print(ticker)
         # Calculate the RSI
         delta = df['Close_{}'.format(ticker)].diff()
         up, down = delta.copy(), delta.copy()

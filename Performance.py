@@ -67,7 +67,7 @@ def metrics(portfolio, simulation_name):
     pm['average_duration_of_losing_trades_days'] = "{:,.0f}".format(dft[dft['trade net profit'] < 0.0].mean()
                                                                     ['holding period days'])
 
-    losing_trades_that_hit_max_stop = dft[dft['trade net profit'] < -abs(Cp.AmountToRiskPerTrade)].count()[0]
+    losing_trades_that_hit_max_stop = dft[dft['trade net profit'] < -abs(Cp.amount_to_risk_per_trade)].count()[0]
     pm['losing_trades_that_hit_max_stop'] = "{:,}".format(losing_trades_that_hit_max_stop)
 
     win_loss_ratio = abs(dft[dft['trade net profit'] >= 0.0].sum()['trade net profit'] /

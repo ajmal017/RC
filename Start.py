@@ -32,7 +32,6 @@ def run_simulation(simulation_name, universe_of_tickers_df, column_to_group_by='
 
             # At least 2 tickers are required for a long-short strategy
             if len(tickers) > 4:
-                print('Doing: {}'.format(ticker_group))
                 df = Strategy.create_long_short_tickers(tickers, df, ticker_group)
                 print('Done: {}'.format(ticker_group))
             else:
@@ -102,8 +101,8 @@ def case_sims():
 
     # Case 2: Run 1 simulation for a specific industry_group or sector (metrics, backtest + orders/trades
     # df = df[df['Exchange_Sector'] == 'NASDAQ_Technology']
-    df = df[df['Exchange_Sector'] == 'LON_Financials']
-    #df = df[df['Exchange_Sector'] == 'NYSE_Finance'] #
+    # df = df[df['Exchange_Sector'] == 'LON_Financials']
+    df = df[df['Exchange_Sector'] == 'NYSE_Finance']
     # df = df[df['Exchange_Sector'].isin(['NASDAQ_Technology', 'NYSE_Finance', 'LON_Financials'])]
     #df = df[df['Exchange_Sector'].isin(['LON_Financials', 'LON_Consumer', 'LON_Industrials', 'LON_Basic Materials', 'LON_Consumer Goods', 'LON_Health Care', 'LON_Technology', 'LON_Oil & Gas'])]
     run_simulation(simulation_name='Single', universe_of_tickers_df=df, generate_outputs=True)
@@ -120,8 +119,8 @@ def production():
 
 if __name__ == "__main__":
     print('Start: {}\n'.format(datetime.datetime.today()))
-    production()
-    #case_sims()
+    #production()
+    case_sims()
     print('\nFinished: {}'.format(datetime.datetime.today()))
 
 
