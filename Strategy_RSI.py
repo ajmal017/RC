@@ -4,7 +4,7 @@ import ConfigParameters as cp
 def create_long_short_tickers(tickers, df, ticker_group):
     # Add RSI values
     for ticker in tickers:  # [cp.ticker_benchmark] +
-        # print(ticker)
+        print(ticker)
         # Calculate the RSI
         delta = df['Close_{}'.format(ticker)].diff()
         up, down = delta.copy(), delta.copy()
@@ -20,7 +20,8 @@ def create_long_short_tickers(tickers, df, ticker_group):
         df = df.join(rsi.to_frame('RSI_{}'.format(ticker)))
 
     # Go Long/Short depending on the ticker_group (exchange-sector)
-    if ticker_group in ['NASDAQ_Transportation', 'NASDAQ_Capital Goods', 'NYSE_Finance', 'LON_Oil & Gas', 'LON_Utilities']:
+    if ticker_group in ['NASDAQ_Transportation', 'NASDAQ_Capital Goods', 'NYSE_Finance',
+                        'LON_Oil & Gas', 'LON_Utilities', 'LON_Financials']:
         df[ticker_group + '_long_ticker'] = df.apply(low_rsi, axis=1, args=(tickers,))
         df[ticker_group + '_short_ticker'] = df.apply(high_rsi, axis=1, args=(tickers,))
     else:
