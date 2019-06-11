@@ -140,8 +140,11 @@ def manage_orders_for_long_or_short(portfolio, bar, ticker_group):
 
     # Close any positions if GBP P&L has exceeded AmountToRiskPerTrade because of exchange rates
     for open_ticker in current_open_positions:
+        if open_ticker == 'NYSE:RE' and portfolio.trade_id[open_ticker] == 2:
+            print(open_ticker, portfolio.trade_id[open_ticker], portfolio.pl[open_ticker])
         if portfolio.pl[open_ticker] < -1.0 * abs(Cp.amount_to_risk_per_trade):
-            exit_position(portfolio, bar, open_ticker)
+            #exit_position(portfolio, bar, open_ticker)
+            pass
 
 
 def manage_orders_for_pairs_positions(portfolio, bar, ticker_group):
