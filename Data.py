@@ -86,7 +86,7 @@ def get_tickers_with_good_data(tickers):
             df = pd.read_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], ticker.replace(':', '_')))
             df = df.sort_index()
 
-            if len(df.index) < 300:
+            if len(df.index) < 2000:
                 if Cp.logging:
                     print('Less than 300 rows: {} ({})'.format(ticker, len(df.index)))
             elif not do_dataframes_have_same_last_n_days_of_histories(df, dfb, 2):

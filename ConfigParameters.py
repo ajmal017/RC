@@ -113,7 +113,7 @@ rsi_period = 14
 maximum_number_of_open_tickers_per_ticker_group = 2
 relative_strength_periods = [5, 20, 60] # 1w (5), 1m (20), 3m (60), 6m (125), 12m (250)
 
-hedge_fx = False
+hedge_fx = True
 
 # All GBP
 initial_cash = 10000.0

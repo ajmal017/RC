@@ -40,6 +40,7 @@ def run(df, portfolio):
 
             position_value = portfolio.position[ticker] * curr_row['Close_' + ticker] * fx
             portfolio.pl[ticker] = position_value - (portfolio.position[ticker] * portfolio.last_deal_price[ticker] * fx)
+            df.at[i, 'position_value_' + ticker] = position_value
 
             portfolio.net_exposure += position_value
             portfolio.gross_exposure += abs(position_value)
@@ -137,14 +138,6 @@ def manage_orders_for_long_or_short(portfolio, bar, ticker_group):
     # Manage stop orders for current_open_positions
     for open_ticker in current_open_positions:
         manage_stop_orders(portfolio, bar, open_ticker)
-
-    # Close any positions if GBP P&L has exceeded AmountToRiskPerTrade because of exchange rates
-    for open_ticker in current_open_positions:
-        if open_ticker == 'NYSE:RE' and portfolio.trade_id[open_ticker] == 2:
-            print(open_ticker, portfolio.trade_id[open_ticker], portfolio.pl[open_ticker])
-        if portfolio.pl[open_ticker] < -1.0 * abs(Cp.amount_to_risk_per_trade):
-            #exit_position(portfolio, bar, open_ticker)
-            pass
 
 
 def manage_orders_for_pairs_positions(portfolio, bar, ticker_group):
