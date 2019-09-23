@@ -1,4 +1,4 @@
-import ConfigParameters as Cp
+import ConfigParameters as cp
 import pandas as pd
 
 
@@ -13,7 +13,7 @@ class Portfolio:
         # Initialise portfolio metrics
         self.net_exposure = 0.0
         self.gross_exposure = 0.0
-        self.cash = Cp.initial_cash
+        self.cash = cp.initial_cash
         self.equity = self.cash + self.net_exposure
         self.orders = []
         self.df = df
@@ -35,7 +35,7 @@ class Portfolio:
                     self.tickers.append(ticker)
 
         # Add USD-GBP if FX hedge
-        if Cp.hedge_fx is True:
+        if cp.hedge_fx is True:
             self.tickers.append('USD-GBP')
 
         # Initialise metrics for all tickers

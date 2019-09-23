@@ -1,9 +1,18 @@
-import pandas as pd
-import ConfigParameters as cp
-from datetime import datetime, timedelta
+
+# from datetime import datetime, timedelta
+import datetime
 import matplotlib.pyplot as plt
-import seaborn as sn
 import Data as da
+import pandas as pd
+import numpy as np
+import ConfigParameters as cp
+import Strategy_FinAstro as Strategy
+from Portfolio import Portfolio as Portfolio
+import Performance as Performance
+import Graphs as Graphs
+import Backtest as Backtest
+import seaborn as sns
+sns.set()
 
 
 def get_actual_degrees(x):
@@ -83,43 +92,106 @@ def plot_astro_stock(df):
 
 
 def create_ephemeris_df():
-    df_eph = pd.read_csv('Ephemeris2024.csv')
-    df_eph['Date'] = pd.to_datetime(df_eph['Date']).dt.strftime('%Y-%m-%d')
-    df_eph['SunMoonActualDegrees'] = df_eph.apply(get_actual_degrees, axis=1)
-    df_eph['SunMoonAspectDegrees'] = df_eph.apply(get_degrees, axis=1)
-    df_eph['SunMoonAspect'] = df_eph.apply(get_aspect, axis=1)
-    df_eph['SunSign'] = df_eph.apply(get_sign, axis=1)
-    df_eph['cob'] = df_eph['Date']
-    df_eph = df_eph.set_index('Date')
-    df_eph = df_eph[['SunLong', 'MoonLong','SunMoonActualDegrees', 'SunMoonAspectDegrees', 'SunMoonAspect',
-                     'SunSign', 'cob']]
+    df = pd.read_csv('Ephemeris2024.csv')
+    df['Date'] = pd.to_datetime(df['Date']).dt.strftime('%Y-%m-%d')
+    df['SunMoonActualDegrees'] = df.apply(get_actual_degrees, axis=1)
+    df['SunMoonAspectDegrees'] = df.apply(get_degrees, axis=1)
+    df['SunMoonAspectRaw'] = df.apply(get_aspect, axis=1)
+    df['SunSign'] = df.apply(get_sign, axis=1)
+    df['cob'] = df['Date']
+    # print(df_eph[['Date', 'cob']].dtypes)
+    df = df.set_index('Date')
+    df.index = pd.to_datetime(df.index)
+    df['day_of_week'] = df.index.weekday  # 0=Monday, 1=Tuesday, 2=Wednesday, 3=Thursday, 4=Friday
+    df['previous_day'] = df['day_of_week'].shift(1)
+    df['next_day'] = df['day_of_week'].shift(-1)
 
-    return df_eph
+    # If there is no aspect on Friday, then use Saturday's aspect
+    df['SunMoonAspectRawNext'] = df['SunMoonAspectRaw'].shift(-1)
+    df['SunMoonAspect'] = np.where((df['day_of_week'] == 4.0) & (df['SunMoonAspectRaw'] == ''), df['SunMoonAspectRawNext'], df['SunMoonAspectRaw'])
+
+    # If there is no aspect on Monday, then use Sunday's aspect
+    df['SunMoonAspectRawPrevious'] = df['SunMoonAspectRaw'].shift(1)
+    df['SunMoonAspect'] = np.where((df['day_of_week'] == 0.0) & (df['SunMoonAspectRaw'] == ''), df['SunMoonAspectRawPrevious'], df['SunMoonAspectRaw'])
+
+    df = df[['SunLong', 'MoonLong','SunMoonActualDegrees', 'SunMoonAspectDegrees', 'SunSign', 'cob', 'SunMoonAspect',
+             'day_of_week', 'previous_day','SunMoonAspectRawPrevious', 'next_day', 'SunMoonAspectRawNext',
+             'SunMoonAspectRaw']]
+    df.to_csv(cp.files['ephemeris'])
+    return df
 
 
 def collect_and_prepare_data():
     # Add stock data
     # tickers = ['NASDAQ:MSFT', 'NASDAQ:AAPL']
-    tickers = ['LON:IGUS', 'LON:VUKE']
+    tickers = ['LON:FTSE100']
     df_tickers = da.create_df_from_tickers(tickers)
-    print(df_tickers.tail(3))
+
     # Add Ephemeris data
     df_eph = create_ephemeris_df()
-    df_eph = df_eph[(df_eph.index > '2010-01-01') & (df_eph.index < '2019-02-28')]
+    df_eph = df_eph[(df_eph.index > '2001-01-01') & (df_eph.index < '2019-08-28')]
     df = df_eph.join(df_tickers, how='inner')
-    df.to_csv('finastro.csv')
-    # print(df.tail())
-    plot_astro_stock(df)
+
+    cols = ['year', 'weekday',
+            'SunLong',
+            'MoonLong',
+            'SunMoonActualDegrees',
+            'SunMoonAspectDegrees',
+            'SunMoonAspect',
+            'SunSign',
+            'Close_S&P500',
+            'Change_pct_S&P500',
+            'Close_CBOE:VIX',
+            'Close_USD-GBP',
+            'Change_pct_USD_GBP',
+            'Close_LON:FTSE100',
+            'Change_pct_LON:FTSE100',
+            'Std_Dev_LON:FTSE100',
+            'Std_Dev_pct_LON:FTSE100'
+            ]
+    df[cols].to_csv('finastro.csv')
+
+    #plot_astro_stock(df)
 
 
-def machine_learning_process():
-    collect_and_prepare_data()
+def finastro_sim():
+    # Add stock data
+    ticker_group = 'FinAstro'
+    tickers = ['LON:FTSE100']
+    df_tickers = da.create_df_from_tickers(tickers)
+
+    # Add Ephemeris data
+    df_eph = create_ephemeris_df()
+    df_eph = df_eph[(df_eph.index > '2001-01-01') & (df_eph.index < '2019-08-28')]
+    df = df_eph.join(df_tickers, how='inner')
+
+    # Generate long/short tickers i.e. signals
+    df = Strategy.create_long_short_tickers(tickers, df, ticker_group)
+
+    # Run backtest
+    portfolio = Portfolio(df)
+    Backtest.run(df, portfolio)
+    Performance.metrics(portfolio, ticker_group)
+
+    # Outputs
+    pd.options.display.float_format = '{:20,.2f}'.format
+    portfolio.orders_df.to_csv(cp.files['orders'])
+    portfolio.trades_df.to_csv(cp.files['trades'])
+    portfolio.df.to_csv(cp.files['backtest'])
+
+    portfolio.metrics_df.to_csv(cp.files['metrics'])
+    print(portfolio.metrics_df)
+    Graphs.equity_curve(df=portfolio.df)
 
 
 if __name__ == "__main__":
-    # add_detail_to_ephemeris()
-    machine_learning_process()
-    """
-    1. Add year
-    2. Try to identify whether market is bullish or bearish
-    """
+    print('Start: {}\n'.format(datetime.datetime.today()))
+    finastro_sim()
+    # collect_and_prepare_data()
+    # create_ephemeris_df()
+    print('\nFinished: {}'.format(datetime.datetime.today()))
+
+"""
+1. Add year
+2. Try to identify whether market is bullish or bearish
+"""

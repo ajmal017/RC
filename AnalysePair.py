@@ -12,7 +12,7 @@ sn.set()
 
 
 def analyse(ticker1, ticker2):
-    df = Data.create_df_from_tickers(tickers=[ticker1, ticker2], start_date='2008-01-01')
+    df = Data.create_df_from_tickers(tickers=[ticker1, ticker2], start_date='2001-01-01')
 
     # Compute bollinger bands
     df['ratio'] = df['Close_' + ticker2] / df['Close_' + ticker1]
@@ -90,7 +90,8 @@ def rolling_stats(df, y_column, x_column, window=20):
 
 
 if __name__ == "__main__":
-    ticker_pair = 'NASDAQ:AMAT_NASDAQ:MSFT'
+    ticker_pair = 'LON:FTSE100_LON:FTSE250'
+    # ticker_pair = 'NASDAQ:AMAT_NASDAQ:MSFT'
     # ticker_pair = 'NYSE:TD_NYSE:BLK'
     # ticker_pair = 'LON:IGUS_LON:VUSA'
     # ticker_pair = 'NASDAQ:AABA_NYSE:VMW'

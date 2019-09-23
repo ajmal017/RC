@@ -41,7 +41,9 @@ files = {
     'ML': environment + r'Outputs/ML.csv',
     'temp': environment + r'Outputs/_temp.csv',
     'latest_signals': environment + r'Outputs/latest_signals.csv',
-    'ib_xml': environment + r'Outputs/IB/ib.xml'
+    'ib_xml': environment + r'Outputs/IB/ib.xml',
+
+    'ephemeris': environment + r'Outputs/ephemeris.csv'
 }
 
 quandl_key = 'pn4vPwr_oQm-B9yYoeUB'
@@ -103,7 +105,7 @@ macro = [
 
 lookback = 60
 deal_signal_lag = 1 # number of days to wait after signal before executing trade
-position_model = 'long_or_short'    # pairs_long_and_short, long_or_short
+position_model = 'long_only'    # pairs_long_and_short, long_or_short, long_only
 
 ewma = {'fast': 50, 'slow': 200}
 bollinger_band_factor = 2.0
@@ -117,8 +119,8 @@ hedge_fx = True
 
 # All GBP
 initial_cash = 10000.0
-amount_to_risk_per_trade = 500.0
-min_pl = 500.0
+amount_to_risk_per_trade = 100.0
+min_pl = 125.0
 max_position = 11000.0
 min_position = 6000.0
 

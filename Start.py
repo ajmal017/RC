@@ -118,6 +118,9 @@ def production():
     run_simulation(simulation_name='All', universe_of_tickers_df=df, run_backtest=False)
 
 
+
+
+
 if __name__ == "__main__":
     print('Start: {}\n'.format(datetime.datetime.today()))
     #production()

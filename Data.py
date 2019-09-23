@@ -1,6 +1,7 @@
 import os
 import time
 import pandas as pd
+import numpy as np
 import pandas_datareader as pdr
 import ConfigParameters as Cp
 from datetime import datetime
@@ -67,6 +68,7 @@ def create_df_from_tickers(tickers, start_date=None, end_date=None):
 
     df['DealDate'] = df.index
     df['weekday'] = df.index.weekday  # 0=Monday, 1=Tuesday, 2=Wednesday, 3=Thursday, 4=Friday
+    df['year'] = df.index.year
 
     return df
 
@@ -155,7 +157,7 @@ def download_yahoo_eod_data():
 
 def download_yahoo_eod_data_for_single_ticker(yahoo_ticker, filename, close_column_name=''):
     try:
-        df = pdr.data.get_data_yahoo(yahoo_ticker)
+        df = pdr.data.get_data_yahoo(symbols=yahoo_ticker, start='2001-01-01', interval='d')
         df = df.drop(['Open', 'High', 'Low', 'Close', 'Volume'], axis=1)
     except:
         print('Problem with Yahoo for ticker {} '.format(yahoo_ticker))
@@ -185,7 +187,7 @@ def download_quandl_data():
 
     for ticker, quandl_code in quandl_tickers.items():
         try:
-            df = quandl.get([quandl_code], start_date='2010-01-01', collapse='daily', transform='none')
+            df = quandl.get([quandl_code], start_date='2001-01-01', collapse='daily', transform='none')
             df.rename(columns={quandl_code + ' - Value': 'Close_{}'.format(ticker)}, inplace=True)
             df.rename(columns={quandl_code + ' - Last': 'Close_{}'.format(ticker)}, inplace=True)
 
@@ -274,15 +276,27 @@ def static_data():
     df.to_csv('TickerMaster.csv')
 
 
+def clean_ticker(ticker):
+
+    df = pd.read_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], ticker.replace(':', '_')), index_col=0)
+
+    if ticker == 'LON:ISF':
+        df['Close_LON:ISF'] = np.where(df['Close_LON:ISF'] < 100.0, df['Close_LON:ISF'] * 100.0, df['Close_LON:ISF'])
+        df.to_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], ticker.replace(':', '_')))
+
+    print('{} cleaned'.format(ticker))
+
 
 if __name__ == "__main__":
     print('Start: ', datetime.today())
-    production()
+    # production()
+    download_quandl_data()
+    # clean_ticker('LON:ISF')
     # static_data()
-    # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='^GSPC', filename=Cp.ticker_benchmark, close_column_name=Cp.ticker_benchmark)
+    download_yahoo_eod_data_for_single_ticker(yahoo_ticker='^GSPC', filename=Cp.ticker_benchmark, close_column_name=Cp.ticker_benchmark)
     # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='VUKE.L', filename='LON_VUKE', close_column_name='LON:VUKE')
     # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='MSFT', filename='NYSE_MSFT', close_column_name='NASDAQ:MSFT')
-    # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='^VIX', filename='CBOE_VIX', close_column_name='CBOE:VIX')
+    download_yahoo_eod_data_for_single_ticker(yahoo_ticker='^VIX', filename='CBOE_VIX', close_column_name='CBOE:VIX')
     # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='ISF.L', filename='LON_ISF', close_column_name='LON:ISF')
     # download_yahoo_eod_data_for_single_ticker(yahoo_ticker='IGUS.L', filename='LON_IGUS', close_column_name='LON:IGUS')
 
