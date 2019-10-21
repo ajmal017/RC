@@ -10,7 +10,7 @@ import seaborn as sns
 sns.set()
 
 
-def equity_curve(backtest_file=None, df=None):
+def equity_curve(backtest_file=None, df=None, ticker_benchmark=Cp.ticker_benchmark):
     if df is None:
         df = pd.DataFrame.from_csv(backtest_file)  # backtest
     current_date = df.tail(1).index[0]
@@ -19,9 +19,9 @@ def equity_curve(backtest_file=None, df=None):
     f, (ax_eq_ret, ax_drawdown, ax_exposure) = plt.subplots(3, sharex=False, sharey=False)
 
     # Equity Cumulative Returns: Benchmark1
-    cum_return_benchmark1 = df.loc[current_date, 'BarReturnCum_' + Cp.ticker_benchmark] * 100.0
-    lbl_benchmark1 = 'Benchmark ({}) = {:3.2f}%'.format(Cp.ticker_benchmark, cum_return_benchmark1)
-    ax_eq_ret.plot(x_t, df['BarReturnCum_{}'.format(Cp.ticker_benchmark)], label=lbl_benchmark1, color='black')
+    cum_return_benchmark1 = df.loc[current_date, 'BarReturnCum_' + ticker_benchmark] * 100.0
+    lbl_benchmark1 = 'Benchmark ({}) = {:3.2f}%'.format(ticker_benchmark, cum_return_benchmark1)
+    ax_eq_ret.plot(x_t, df['BarReturnCum_{}'.format(ticker_benchmark)], label=lbl_benchmark1, color='black')
 
     # Equity Cumulative Returns: Strategy
     cum_return_strategy = df.loc[current_date, 'equity_cumulative_returns'] * 100.0

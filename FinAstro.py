@@ -120,61 +120,6 @@ def create_ephemeris_df():
     return df
 
 
-def create_df_from_tickers(tickers, ticker_benchmark=cp.ticker_benchmark):
-    """
-     Create a single DF from a list of tickers, where each column is the Closing price for each ticker
-     pct columns will be expressed as decimals e.g. 0.23 is 23%
-     """
-    # Instantiate the dataframe with a benchmark whose index can be used to outer-join to
-    df = pd.read_csv('{}{}.csv'.format(cp.dirs['PriceHistories'], ticker_benchmark.replace(':', '_')), index_col=0)
-    df['Close_' + ticker_benchmark].replace(to_replace=0, method='ffill', inplace=True)
-    df['Change_pct_' + ticker_benchmark] = df['Close_' + ticker_benchmark].pct_change()
-
-    # add FX
-    df['Close_GBX-GBP'] = 0.01
-    dfa = pd.read_csv('{}{}.csv'.format(Cp.dirs['PriceHistories'], 'USD-GBP'), index_col=0)
-    df = df.join(dfa, how='inner')
-    df['Change_pct_USD_GBP'] = df['Close_USD-GBP'].pct_change()
-
-    # Create the multi_stock dataframe
-    for ticker in tickers:
-
-        if 'USD' in ticker:
-            file_name = '{}{}.csv'.format(cp.dirs['PriceHistories'], ticker)
-        else:
-            file_name = '{}{}.csv'.format(cp.dirs['PriceHistories'], ticker.replace(':', '_'))
-
-        dfa = pd.read_csv(file_name, index_col=0)
-        df = df.join(dfa, how='inner', rsuffix=ticker)
-
-    for ticker in tickers:
-        df['Change_pct_' + ticker] = df['Close_' + ticker].pct_change()
-        df['Std_Dev_' + ticker] = df['Close_' + ticker].rolling(window=Cp.lookback).std()
-        df['Std_Dev_' + ticker].fillna(method='bfill', inplace=True)
-        df['Std_Dev_pct_' + ticker] = df['Std_Dev_' + ticker] / df['Close_' + ticker]
-        df['EntryPrice_' + ticker] = 0.5 * (df['Close_' + ticker] + df['Close_' + ticker].shift(1))
-
-    df = df.sort_index(ascending=True)
-
-    # Yahoo data has historical prices until today - 1 business day. This section adds a row to DF for
-    # today (cob) so that we can get orders for today
-    df.index = pd.to_datetime(df.index)
-    last_cob_row = {df.index[-1] + BDay(1): df.iloc[-1]}
-    df_last_cob_row = pd.DataFrame.from_dict(last_cob_row, orient='index')
-    df = pd.concat([df, df_last_cob_row])
-
-    # Loop through each column and fill
-    for column in df:
-        df[column].fillna(method='bfill', inplace=True)
-        df[column].fillna(method='ffill', inplace=True)
-
-    df['DealDate'] = df.index
-    df['weekday'] = df.index.weekday  # 0=Monday, 1=Tuesday, 2=Wednesday, 3=Thursday, 4=Friday
-    df['year'] = df.index.year
-
-    return df
-
-
 def collect_and_prepare_data():
     # Add stock data
     # tickers = ['NASDAQ:MSFT', 'NASDAQ:AAPL']
@@ -211,12 +156,12 @@ def collect_and_prepare_data():
 def finastro_sim():
     # Add stock data
     ticker_group = 'FinAstro'
-    tickers = ['LON:FTSE100', ]
+    tickers = ['LON:FTSE100']
     df_tickers = da.create_df_from_tickers(tickers)
 
     # Add Ephemeris data
     df_eph = create_ephemeris_df()
-    df_eph = df_eph[(df_eph.index > '2001-01-01') & (df_eph.index < '2019-08-28')]
+    df_eph = df_eph[(df_eph.index > '2001-01-01') & (df_eph.index < '2019-09-30')]
     df = df_eph.join(df_tickers, how='inner')
 
     # Generate long/short tickers i.e. signals

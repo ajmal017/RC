@@ -81,7 +81,9 @@ crypto_tickers = {
     'DSH-USD': 'BITFINEX/DSHUSD'
 }
 
-ticker_benchmark = 'S&P500'    # S&P500
+ticker_benchmark = 'S&P500'    # S&P500, LON:FTSE100
+
+
 macro = [
     {'Exchange': 'NYSE', 'Market': 'Main', 'Ticker': 'S&P500', 'Symbol': 'S&P500', 'Name': 'S&P500',
          'Sector': 'Macro', 'Industry Grp': 'Index', 'CCY': 'USD', 'MarketCapBillions': 0.0,
@@ -105,7 +107,7 @@ macro = [
 
 lookback = 60
 deal_signal_lag = 1 # number of days to wait after signal before executing trade
-position_model = 'long_only'    # pairs_long_and_short, long_or_short, long_only
+position_model = 'long_only'    # pairs_long_and_short, long_or_short, long_only, simple_long_only
 
 ewma = {'fast': 50, 'slow': 200}
 bollinger_band_factor = 2.0

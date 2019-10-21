@@ -10,6 +10,10 @@ import quandl
 
 
 def create_df_from_tickers(tickers, start_date=None, end_date=None):
+    try:
+        tickers.remove(Cp.ticker_benchmark)
+    except:
+        pass
     """
     Create a single DF from a list of tickers, where each column is the Closing price for each ticker
     pct columns will be expressed as decimals e.g. 0.23 is 23%
